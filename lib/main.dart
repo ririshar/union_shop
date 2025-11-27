@@ -512,7 +512,7 @@ class AppFooter extends StatelessWidget {
             Text('Last post date: 12pm on 18/12/2025',
                 style: TextStyle(fontSize: 14)),
             SizedBox(height: 8),
-            Divider(height: 12, thickness: 1),
+            Text('------------------------', style: TextStyle(fontSize: 14)),
             SizedBox(height: 8),
             Text('(Term Time)',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
