@@ -61,8 +61,8 @@ class _AppShellState extends State<AppShell> {
                           horizontal: 16, vertical: 12),
                       // visual separation
                       color: Colors.white,
-                      child: Row(
-                        children: const [
+                      child: const Row(
+                        children: [
                           // Purple "Home" label
                           Text(
                             'Home',
@@ -269,6 +269,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: Container(
                         decoration:
+                            // ignore: deprecated_member_use
                             BoxDecoration(color: Colors.black.withOpacity(0.7)),
                       ),
                     ),
