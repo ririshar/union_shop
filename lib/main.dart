@@ -16,132 +16,10 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      // Use AppShell as the top-level home so the "Home" table stays visible
-      home: const AppShell(),
-    );
-  }
-}
-
-// AppShell shows a persistent top area (the "table labelled Home") and an inner Navigator.
-// The inner Navigator loads the HomeScreen and other pages. The top table is always visible.
-class AppShell extends StatefulWidget {
-  const AppShell({super.key});
-
-  @override
-  State<AppShell> createState() => _AppShellState();
-}
-
-class _AppShellState extends State<AppShell> {
-  final GlobalKey<NavigatorState> _innerNavKey = GlobalKey<NavigatorState>();
-
-  void _goHome() {
-    // Navigate the inner navigator back to the home route.
-    _innerNavKey.currentState?.pushNamedAndRemoveUntil('/', (r) => false);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // Top persistent area: a small table-like widget labelled "Home" with purple text.
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          // Top table styled as a small horizontal bar.
-          Container(
-            width: double.infinity,
-            color: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            child: Row(
-              children: [
-                // Logo on the left
-                GestureDetector(
-                  onTap: () {
-                    _goHome();
-                  },
-                  child: Image.network(
-                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    height: 36,
-                    width: 36,
-                    fit: BoxFit.contain,
-                    errorBuilder: (c, e, s) => Container(
-                      width: 36,
-                      height: 36,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported,
-                          color: Colors.grey),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(width: 8),
-
-                // Small "table" labelled Home placed immediately next to the logo.
-                GestureDetector(
-                  onTap: _goHome,
-                  child: Table(
-                    defaultColumnWidth: const IntrinsicColumnWidth(),
-                    children: [
-                      TableRow(children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4),
-                            // subtle border so it reads as a small table cell
-                            border: Border.all(color: Colors.grey.shade200),
-                          ),
-                          child: const Text(
-                            'Home',
-                            style: TextStyle(
-                              // dark purple as requested
-                              color: Color(0xFF4d2963),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ],
-                  ),
-                ),
-
-                // small gap, then push icons to the right
-                const SizedBox(width: 12),
-                const Spacer(),
-
-                // Search icon (keeps it on the top bar)
-                IconButton(
-                  icon: const Icon(Icons.search, color: Colors.grey),
-                  onPressed: () {
-                    // placeholder for future search action
-                  },
-                ),
-              ],
-            ),
-          ),
-          // Expanded inner area contains a Navigator so child pages render below the top table.
-          Expanded(
-            child: Navigator(
-              key: _innerNavKey,
-              initialRoute: '/',
-              onGenerateRoute: (settings) {
-                Widget page;
-                switch (settings.name) {
-                  case '/product':
-                    page = const ProductPage();
-                    break;
-                  case '/':
-                  default:
-                    page = const HomeScreen();
-                }
-                return MaterialPageRoute(
-                    builder: (_) => page, settings: settings);
-              },
-            ),
-          ),
-        ],
-      ),
+      home: const HomeScreen(),
+      routes: {
+        '/product': (context) => const ProductPage(),
+      },
     );
   }
 }
@@ -164,11 +42,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Note: this Scaffold is the page content displayed under the persistent top table.
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // (Existing home content kept; it's displayed below the persistent top table)
             // Header (kept simple for static demo)
             Container(
               height: 100,
