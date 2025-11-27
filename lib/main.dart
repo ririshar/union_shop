@@ -16,12 +16,100 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      home: const HomeScreen(),
-      // By default, the app starts at the '/' route, which is the HomeScreen
-      initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
-      routes: {'/product': (context) => const ProductPage()},
+      // Use AppShell as the top-level home so the "Home" table stays visible
+      home: const AppShell(),
+    );
+  }
+}
+
+// AppShell shows a persistent top area (the "table labelled Home") and an inner Navigator.
+// The inner Navigator loads the HomeScreen and other pages. The top table is always visible.
+class AppShell extends StatefulWidget {
+  const AppShell({super.key});
+
+  @override
+  State<AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends State<AppShell> {
+  final GlobalKey<NavigatorState> _innerNavKey = GlobalKey<NavigatorState>();
+
+  void _goHome() {
+    // Navigate the inner navigator back to the home route.
+    _innerNavKey.currentState?.pushNamedAndRemoveUntil('/', (r) => false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // Top persistent area: a small table-like widget labelled "Home" with purple text.
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          // Top table styled as a small horizontal bar.
+          Container(
+            width: double.infinity,
+            color: Colors.white,
+            child: Table(
+              columnWidths: const {0: FlexColumnWidth()},
+              children: [
+                TableRow(children: [
+                  GestureDetector(
+                    onTap: _goHome,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      // visual separation
+                      color: Colors.white,
+                      child: Row(
+                        children: const [
+                          // Purple "Home" label
+                          Text(
+                            'Home',
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                            ),
+                          ),
+                          SizedBox(width: 12),
+                          // small hint text (optional)
+                          Text(
+                            '(click to go to front page)',
+                            style:
+                                TextStyle(color: Colors.black54, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+              ],
+            ),
+          ),
+
+          // Expanded inner area contains a Navigator so child pages render below the top table.
+          Expanded(
+            child: Navigator(
+              key: _innerNavKey,
+              initialRoute: '/',
+              onGenerateRoute: (settings) {
+                Widget page;
+                switch (settings.name) {
+                  case '/product':
+                    page = const ProductPage();
+                    break;
+                  case '/':
+                  default:
+                    page = const HomeScreen();
+                }
+                return MaterialPageRoute(
+                    builder: (_) => page, settings: settings);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -30,11 +118,11 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
   }
 
   void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
+    Navigator.of(context).pushNamed('/product');
   }
 
   void placeholderCallbackForButtons() {
@@ -44,10 +132,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Note: this Scaffold is the page content displayed under the persistent top table.
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
+            // (Existing home content kept; it's displayed below the persistent top table)
+            // Header (kept simple for static demo)
             Container(
               height: 100,
               color: Colors.white,
@@ -64,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
-                  // Main header
+                  // Main header (static)
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -160,7 +250,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Hero Section
+            // Hero Section (static)
             SizedBox(
               height: 400,
               width: double.infinity,
@@ -178,9 +268,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
+                        decoration:
+                            BoxDecoration(color: Colors.black.withOpacity(0.7)),
                       ),
                     ),
                   ),
@@ -233,7 +322,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Products Section
+            // Products Section (static)
             Container(
               color: Colors.white,
               child: Padding(
@@ -325,7 +414,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        Navigator.of(context).pushNamed('/product');
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
