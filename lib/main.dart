@@ -496,40 +496,81 @@ class AppFooter extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1000),
-        child: const Column(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Opening Hours',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            // Opening times column
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Opening Hours',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(height: 8),
+                  Text('❄️ Winter Break Closure Dates ❄️',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 6),
+                  Text('Closing 4pm 19/12/2025',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  Text('Reopening 10am 05/01/2026',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  Text('Last post date: 12pm on 18/12/2025',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 8),
+                  Text(
+                      '------------------------------------------------------------------',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 8),
+                  Text('(Term Time)',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  Text('Monday - Friday 10am - 4pm',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 8),
+                  Text('(Outside of Term Time / Consolidation Weeks)',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  Text('Monday - Friday 10am - 3pm',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 8),
+                  Text('Purchase online 24/7',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                ],
+              ),
             ),
-            SizedBox(height: 8),
-            Text('❄️ Winter Break Closure Dates ❄️',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            SizedBox(height: 6),
-            Text('Closing 4pm 19/12/2025',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            Text('Reopening 10am 05/01/2026',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            Text('Last post date: 12pm on 18/12/2025',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            SizedBox(height: 8),
-            Text(
-                '------------------------------------------------------------------',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            SizedBox(height: 8),
-            Text('(Term Time)',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            Text('Monday - Friday 10am - 4pm',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            SizedBox(height: 8),
-            Text('(Outside of Term Time / Consolidation Weeks)',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            Text('Monday - Friday 10am - 3pm',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-            SizedBox(height: 8),
-            Text('Purchase online 24/7',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+
+            SizedBox(width: 40),
+
+            // Help & Information column (title bold, items normal)
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Help and Information',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(height: 8),
+                  Text('Search',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                  SizedBox(height: 6),
+                  Text('Terms & Conditions of Sale Policy',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                ],
+              ),
+            ),
           ],
         ),
       ),
