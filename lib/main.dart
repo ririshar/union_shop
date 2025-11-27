@@ -350,23 +350,31 @@ class AboutScreen extends StatelessWidget {
               placeholderCallbackForButtons: placeholderCallbackForButtons,
             ),
 
-            // Simple text-only About section (no image)
+            // Centered, text-only About section
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'About Us',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'About Us',
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        'Welcome to the Union Shop!\n\nWe’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive personalisation service!\n\nAll online purchases are available for delivery or instore collection!\n\nWe hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don’t hesitate to contact us at hello@upsu.net.\n\nHappy shopping!\n\nThe Union Shop & Reception Team',
+                        style: TextStyle(fontSize: 14),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Welcome to the Union Shop!\n\nWe\'re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive personalisation service!\n\nAll online purchases are available for delivery or instore collection!\n\nWe hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don\'t hesitate to contact us at hello@upsu.net.\n\nHappy shopping!\n\nThe Union Shop & Reception Team',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ],
+                ),
               ),
             ),
 
@@ -381,6 +389,7 @@ class AboutScreen extends StatelessWidget {
                     color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
               ),
             ),
           ],
