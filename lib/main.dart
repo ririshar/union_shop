@@ -89,27 +89,26 @@ class HomeScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          // Home tab placed next to the logo
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Container(
+                          const SizedBox(
+                              width: 12), // slightly more right from logo
+                          // Interactive Home tab (no outer box/border, thinner font)
+                          TextButton(
+                            onPressed: () => navigateToHome(context),
+                            style: TextButton.styleFrom(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(4),
-                                border: Border.all(color: Colors.grey.shade200),
-                              ),
-                              child: const Text(
-                                'Home',
-                                style: TextStyle(
-                                  color: Color(0xFF4d2963), // dark purple
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              minimumSize: Size.zero,
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)),
+                            ),
+                            child: const Text(
+                              'Home',
+                              style: TextStyle(
+                                color: Color(0xFF4d2963), // dark purple
+                                fontWeight: FontWeight.w400, // thinner weight
+                                fontSize: 13,
                               ),
                             ),
                           ),
