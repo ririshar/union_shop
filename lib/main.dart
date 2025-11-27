@@ -50,44 +50,76 @@ class _AppShellState extends State<AppShell> {
           Container(
             width: double.infinity,
             color: Colors.white,
-            child: Table(
-              columnWidths: const {0: FlexColumnWidth()},
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: Row(
               children: [
-                TableRow(children: [
-                  GestureDetector(
-                    onTap: _goHome,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      // visual separation
-                      color: Colors.white,
-                      child: const Row(
-                        children: [
-                          // Purple "Home" label
-                          Text(
-                            'Home',
-                            style: TextStyle(
-                              color: Colors.purple,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(width: 12),
-                          // small hint text (optional)
-                          Text(
-                            '(click to go to front page)',
-                            style:
-                                TextStyle(color: Colors.black54, fontSize: 12),
-                          ),
-                        ],
-                      ),
+                // Logo on the left
+                GestureDetector(
+                  onTap: () {
+                    _goHome();
+                  },
+                  child: Image.network(
+                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                    height: 36,
+                    width: 36,
+                    fit: BoxFit.contain,
+                    errorBuilder: (c, e, s) => Container(
+                      width: 36,
+                      height: 36,
+                      color: Colors.grey[300],
+                      child: const Icon(Icons.image_not_supported,
+                          color: Colors.grey),
                     ),
                   ),
-                ]),
+                ),
+
+                const SizedBox(width: 8),
+
+                // Small "table" labelled Home placed immediately next to the logo.
+                GestureDetector(
+                  onTap: _goHome,
+                  child: Table(
+                    defaultColumnWidth: const IntrinsicColumnWidth(),
+                    children: [
+                      TableRow(children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4),
+                            // subtle border so it reads as a small table cell
+                            border: Border.all(color: Colors.grey.shade200),
+                          ),
+                          child: const Text(
+                            'Home',
+                            style: TextStyle(
+                              // dark purple as requested
+                              color: Color(0xFF4d2963),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ],
+                  ),
+                ),
+
+                // small gap, then push icons to the right
+                const SizedBox(width: 12),
+                const Spacer(),
+
+                // Search icon (keeps it on the top bar)
+                IconButton(
+                  icon: const Icon(Icons.search, color: Colors.grey),
+                  onPressed: () {
+                    // placeholder for future search action
+                  },
+                ),
               ],
             ),
           ),
-
           // Expanded inner area contains a Navigator so child pages render below the top table.
           Expanded(
             child: Navigator(
