@@ -91,11 +91,32 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(
                               width: 12), // slightly more right from logo
-                          // Home tab with hover underline and persistent underline when active.
+                          // Tabs: Home, Shop, The Print Shack, SALE!, About (same interactive style)
                           HomeTab(
+                            label: 'Home',
                             onTap: () => navigateToHome(context),
                             // this screen is the home page, so mark active = true
                             isActive: true,
+                          ),
+                          const SizedBox(width: 8),
+                          HomeTab(
+                            label: 'Shop',
+                            onTap: placeholderCallbackForButtons,
+                          ),
+                          const SizedBox(width: 8),
+                          HomeTab(
+                            label: 'The Print Shack',
+                            onTap: placeholderCallbackForButtons,
+                          ),
+                          const SizedBox(width: 8),
+                          HomeTab(
+                            label: 'SALE!',
+                            onTap: placeholderCallbackForButtons,
+                          ),
+                          const SizedBox(width: 8),
+                          HomeTab(
+                            label: 'About',
+                            onTap: placeholderCallbackForButtons,
                           ),
                           const Spacer(),
                           ConstrainedBox(
@@ -316,9 +337,15 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeTab extends StatefulWidget {
+  final String label;
   final VoidCallback onTap;
   final bool isActive;
-  const HomeTab({super.key, required this.onTap, this.isActive = false});
+  const HomeTab({
+    super.key,
+    required this.label,
+    required this.onTap,
+    this.isActive = false,
+  });
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -347,7 +374,7 @@ class _HomeTabState extends State<HomeTab> {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           color: Colors.transparent,
           child: Text(
-            'Home',
+            widget.label,
             style: TextStyle(
               color: const Color(0xFF4d2963), // dark purple
               fontWeight: FontWeight.w400,
