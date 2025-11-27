@@ -89,6 +89,30 @@ class HomeScreen extends StatelessWidget {
                               },
                             ),
                           ),
+                          const SizedBox(width: 8),
+                          // Home tab placed next to the logo
+                          GestureDetector(
+                            onTap: () {
+                              navigateToHome(context);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(color: Colors.grey.shade200),
+                              ),
+                              child: const Text(
+                                'Home',
+                                style: TextStyle(
+                                  color: Color(0xFF4d2963), // dark purple
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
                           const Spacer(),
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
