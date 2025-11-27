@@ -206,6 +206,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: Container(
                         decoration:
+                            // ignore: deprecated_member_use
                             BoxDecoration(color: Colors.black.withOpacity(0.7)),
                       ),
                     ),
@@ -357,9 +358,9 @@ class AboutScreen extends StatelessWidget {
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 800),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'About Us',
                         style: TextStyle(
