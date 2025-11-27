@@ -313,18 +313,7 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
+            const AppFooter(),
           ],
         ),
       ),
@@ -380,19 +369,7 @@ class AboutScreen extends StatelessWidget {
             ),
 
             // Footer (same as Home)
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            const AppFooter(),
           ],
         ),
       ),
@@ -503,6 +480,51 @@ class ProductCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AppFooter extends StatelessWidget {
+  const AppFooter({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Colors.grey[50],
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1000),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Opening Hours',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            ),
+            SizedBox(height: 8),
+            Text('❄️ Winter Break Closure Dates ❄️',
+                style: TextStyle(fontSize: 14)),
+            SizedBox(height: 6),
+            Text('Closing 4pm 19/12/2025', style: TextStyle(fontSize: 14)),
+            Text('Reopening 10am 05/01/2026', style: TextStyle(fontSize: 14)),
+            Text('Last post date: 12pm on 18/12/2025',
+                style: TextStyle(fontSize: 14)),
+            SizedBox(height: 8),
+            Divider(height: 12, thickness: 1),
+            SizedBox(height: 8),
+            Text('(Term Time)',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+            Text('Monday - Friday 10am - 4pm', style: TextStyle(fontSize: 14)),
+            SizedBox(height: 8),
+            Text('(Outside of Term Time / Consolidation Weeks)',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+            Text('Monday - Friday 10am - 3pm', style: TextStyle(fontSize: 14)),
+            SizedBox(height: 8),
+            Text('Purchase online 24/7', style: TextStyle(fontSize: 14)),
+          ],
+        ),
       ),
     );
   }
