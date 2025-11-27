@@ -496,12 +496,13 @@ class AppFooter extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1000),
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Opening times column
-            Expanded(
-              child: Column(
+            // Opening times column (constrained so it doesn't push the next column away)
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -549,11 +550,13 @@ class AppFooter extends StatelessWidget {
               ),
             ),
 
-            SizedBox(width: 40),
+            // very small gap so second column sits directly next to opening times
+            const SizedBox(width: 8),
 
-            // Help & Information column (title bold, items normal)
-            Expanded(
-              child: Column(
+            // Help & Information column (now placed much closer)
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 320),
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
