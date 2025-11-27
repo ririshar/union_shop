@@ -91,26 +91,11 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(
                               width: 12), // slightly more right from logo
-                          // Interactive Home tab (no outer box/border, thinner font)
-                          TextButton(
-                            onPressed: () => navigateToHome(context),
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 6),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              minimumSize: Size.zero,
-                              backgroundColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
-                            ),
-                            child: const Text(
-                              'Home',
-                              style: TextStyle(
-                                color: Color(0xFF4d2963), // dark purple
-                                fontWeight: FontWeight.w400, // thinner weight
-                                fontSize: 13,
-                              ),
-                            ),
+                          // Home tab with hover underline and persistent underline when active.
+                          HomeTab(
+                            onTap: () => navigateToHome(context),
+                            // this screen is the home page, so mark active = true
+                            isActive: true,
                           ),
                           const Spacer(),
                           ConstrainedBox(
@@ -324,6 +309,55 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeTab extends StatefulWidget {
+  final VoidCallback onTap;
+  final bool isActive;
+  const HomeTab({super.key, required this.onTap, this.isActive = false});
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  bool _hovering = false;
+
+  void _setHover(bool v) {
+    if (_hovering == v) return;
+    setState(() {
+      _hovering = v;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bool underline = _hovering || widget.isActive;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => _setHover(true),
+      onExit: (_) => _setHover(false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          color: Colors.transparent,
+          child: Text(
+            'Home',
+            style: TextStyle(
+              color: const Color(0xFF4d2963), // dark purple
+              fontWeight: FontWeight.w400,
+              fontSize: 13,
+              decoration:
+                  underline ? TextDecoration.underline : TextDecoration.none,
+              decorationColor: const Color(0xFF4d2963),
+              decorationThickness: 1.6,
+            ),
+          ),
         ),
       ),
     );
