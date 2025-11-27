@@ -346,74 +346,24 @@ class AboutScreen extends StatelessWidget {
         child: Column(
           children: [
             TopHeader(
-                activeLabel: 'About',
-                placeholderCallbackForButtons: placeholderCallbackForButtons),
-
-            // About content – keep layout consistent with home (hero + content)
-            SizedBox(
-              height: 280,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration:
-                            BoxDecoration(color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Text(
-                              'About Us',
-                              style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            SizedBox(height: 12),
-                            Text(
-                              'This is the About page. Static content placed here. The header and tabs remain the same as the home page.',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              activeLabel: 'About',
+              placeholderCallbackForButtons: placeholderCallbackForButtons,
             ),
 
-            // About page body content (static)
+            // Simple text-only About section (no image)
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('Our Story',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 12),
                   Text(
-                    'Placeholder About Us text. Add your content here.',
+                    'About Us',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Welcome to the Union Shop!\n\nWe\'re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive personalisation service!\n\nAll online purchases are available for delivery or instore collection!\n\nWe hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don\'t hesitate to contact us at hello@upsu.net.\n\nHappy shopping!\n\nThe Union Shop & Reception Team',
                     style: TextStyle(fontSize: 14),
                   ),
                 ],
