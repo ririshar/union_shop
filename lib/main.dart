@@ -19,7 +19,152 @@ class UnionShopApp extends StatelessWidget {
       home: const HomeScreen(),
       routes: {
         '/product': (context) => const ProductPage(),
+        '/about': (context) => const AboutScreen(),
       },
+    );
+  }
+}
+
+// TopHeader: shared header used by HomeScreen and AboutScreen so tabs stay in the same place
+class TopHeader extends StatelessWidget {
+  final String activeLabel;
+  final VoidCallback placeholderCallbackForButtons;
+
+  const TopHeader({
+    super.key,
+    required this.activeLabel,
+    required this.placeholderCallbackForButtons,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      color: Colors.white,
+      child: Column(
+        children: [
+          // Top banner
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            color: const Color(0xFF4d2963),
+            child: const Text(
+              'PLACEHOLDER HEADER TEXT',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+          // Main header row (logo, tabs, icons)
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // go home — reset stack to home
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil('/', (r) => false);
+                    },
+                    child: Image.network(
+                      'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                      height: 18,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[300],
+                          width: 18,
+                          height: 18,
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported,
+                                color: Colors.grey),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 12), // small gap from logo
+
+                  // Tabs (use HomeTab widget)
+                  HomeTab(
+                    label: 'Home',
+                    onTap: () => Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/', (r) => false),
+                    isActive: activeLabel == 'Home',
+                  ),
+                  const SizedBox(width: 8),
+                  HomeTab(
+                    label: 'Shop',
+                    onTap: placeholderCallbackForButtons,
+                    isActive: activeLabel == 'Shop',
+                  ),
+                  const SizedBox(width: 8),
+                  HomeTab(
+                    label: 'The Print Shack',
+                    onTap: placeholderCallbackForButtons,
+                    isActive: activeLabel == 'The Print Shack',
+                  ),
+                  const SizedBox(width: 8),
+                  HomeTab(
+                    label: 'SALE!',
+                    onTap: placeholderCallbackForButtons,
+                    isActive: activeLabel == 'SALE!',
+                  ),
+                  const SizedBox(width: 8),
+                  HomeTab(
+                    label: 'About',
+                    onTap: () => Navigator.of(context).pushNamed('/about'),
+                    isActive: activeLabel == 'About',
+                  ),
+                  const Spacer(),
+
+                  // right side icons
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.search,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: placeholderCallbackForButtons,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.person_outline,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: placeholderCallbackForButtons,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.shopping_bag_outlined,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: placeholderCallbackForButtons,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.menu,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: placeholderCallbackForButtons,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -27,165 +172,20 @@ class UnionShopApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void navigateToHome(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
-  }
-
-  void navigateToProduct(BuildContext context) {
-    Navigator.of(context).pushNamed('/product');
-  }
-
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
 
   @override
   Widget build(BuildContext context) {
+    // Use the shared TopHeader with activeLabel 'Home'
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header (kept simple for static demo)
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  // Main header (static)
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(
-                              width: 12), // slightly more right from logo
-                          // Tabs: Home, Shop, The Print Shack, SALE!, About (same interactive style)
-                          HomeTab(
-                            label: 'Home',
-                            onTap: () => navigateToHome(context),
-                            // this screen is the home page, so mark active = true
-                            isActive: true,
-                          ),
-                          const SizedBox(width: 8),
-                          HomeTab(
-                            label: 'Shop',
-                            onTap: placeholderCallbackForButtons,
-                          ),
-                          const SizedBox(width: 8),
-                          HomeTab(
-                            label: 'The Print Shack',
-                            onTap: placeholderCallbackForButtons,
-                          ),
-                          const SizedBox(width: 8),
-                          HomeTab(
-                            label: 'SALE!',
-                            onTap: placeholderCallbackForButtons,
-                          ),
-                          const SizedBox(width: 8),
-                          HomeTab(
-                            label: 'About',
-                            onTap: placeholderCallbackForButtons,
-                          ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            TopHeader(
+                activeLabel: 'Home',
+                placeholderCallbackForButtons: placeholderCallbackForButtons),
 
             // Hero Section (static)
             SizedBox(
@@ -206,7 +206,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: Container(
                         decoration:
-                            // ignore: deprecated_member_use
                             BoxDecoration(color: Colors.black.withOpacity(0.7)),
                       ),
                     ),
@@ -270,10 +269,7 @@ class HomeScreen extends StatelessWidget {
                     const Text(
                       'PRODUCTS SECTION',
                       style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        letterSpacing: 1,
-                      ),
+                          fontSize: 20, color: Colors.black, letterSpacing: 1),
                     ),
                     const SizedBox(height: 48),
                     GridView.count(
@@ -323,10 +319,9 @@ class HomeScreen extends StatelessWidget {
               child: const Text(
                 'Placeholder Footer',
                 style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -336,16 +331,125 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// AboutScreen: uses same TopHeader so tabs remain in same place and style
+class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
+
+  void placeholderCallbackForButtons() {
+    // placeholder
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TopHeader(
+                activeLabel: 'About',
+                placeholderCallbackForButtons: placeholderCallbackForButtons),
+
+            // About content – keep layout consistent with home (hero + content)
+            SizedBox(
+              height: 280,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Container(
+                        decoration:
+                            BoxDecoration(color: Colors.black.withOpacity(0.6)),
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              'About Us',
+                              style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              'This is the About page. Static content placed here. The header and tabs remain the same as the home page.',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // About page body content (static)
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('Our Story',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 12),
+                  Text(
+                    'Placeholder About Us text. Add your content here.',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+
+            // Footer (same as Home)
+            Container(
+              width: double.infinity,
+              color: Colors.grey[50],
+              padding: const EdgeInsets.all(24),
+              child: const Text(
+                'Placeholder Footer',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Reusable HomeTab (keeps underline on hover and when active)
 class HomeTab extends StatefulWidget {
   final String label;
   final VoidCallback onTap;
   final bool isActive;
-  const HomeTab({
-    super.key,
-    required this.label,
-    required this.onTap,
-    this.isActive = false,
-  });
+  const HomeTab(
+      {super.key,
+      required this.label,
+      required this.onTap,
+      this.isActive = false});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -376,7 +480,7 @@ class _HomeTabState extends State<HomeTab> {
           child: Text(
             widget.label,
             style: TextStyle(
-              color: const Color(0xFF4d2963), // dark purple
+              color: const Color(0xFF4d2963),
               fontWeight: FontWeight.w400,
               fontSize: 13,
               decoration:
@@ -391,17 +495,17 @@ class _HomeTabState extends State<HomeTab> {
   }
 }
 
+// ProductCard unchanged (keeps existing behavior)
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String imageUrl;
 
-  const ProductCard({
-    super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
-  });
+  const ProductCard(
+      {super.key,
+      required this.title,
+      required this.price,
+      required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -430,16 +534,12 @@ class ProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
+              Text(title,
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  maxLines: 2),
               const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
+              Text(price,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey)),
             ],
           ),
         ],
