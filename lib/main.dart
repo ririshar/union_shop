@@ -49,7 +49,7 @@ class TopHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
             child: const Text(
-              'PLACEHOLDER HEADER TEXT',
+              'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
@@ -499,7 +499,7 @@ class AppFooter extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Opening times column (constrained so it doesn't push the next column away)
+            // Opening times column
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 520),
               child: const Column(
@@ -550,12 +550,12 @@ class AppFooter extends StatelessWidget {
               ),
             ),
 
-            // very small gap so second column sits directly next to opening times
-            const SizedBox(width: 8),
+            // small gap so columns sit next to each other
+            const SizedBox(width: 12),
 
-            // Help & Information column (now placed much closer)
+            // Help & Information column
             ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 320),
+              constraints: const BoxConstraints(maxWidth: 220),
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -571,6 +571,76 @@ class AppFooter extends StatelessWidget {
                   Text('Terms & Conditions of Sale Policy',
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                ],
+              ),
+            ),
+
+            // very small gap so this column sits directly next to Help & Information
+            const SizedBox(width: 12),
+
+            // Latest Offers column: title bold + email field and Subscribe button (no gap between field and button)
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 340),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Latest Offers',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 8),
+                  // email field + subscribe button row
+                  Row(
+                    children: [
+                      // email input — expanded to take available width
+                      const Expanded(
+                        child: SizedBox(
+                          height: 40,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Enter your email',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 10),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  bottomLeft: Radius.circular(4),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  bottomLeft: Radius.circular(4),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // no gap between field and button — pass zero width SizedBox
+                      const SizedBox(width: 0),
+                      SizedBox(
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            minimumSize: const Size(120, 40),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(4),
+                                bottomRight: Radius.circular(4),
+                              ),
+                            ),
+                          ),
+                          child: const Text('Subscribe'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
