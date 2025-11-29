@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 
@@ -187,77 +188,43 @@ class HomeScreen extends StatelessWidget {
                 activeLabel: 'Home',
                 placeholderCallbackForButtons: placeholderCallbackForButtons),
 
-            // Hero Section (static)
-            SizedBox(
+            // Hero Section (replaced with CarouselHero)
+            CarouselHero(
               height: 400,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  // Background image
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration:
-                            // ignore: deprecated_member_use
-                            BoxDecoration(color: Colors.black.withOpacity(0.7)),
-                      ),
-                    ),
-                  ),
-                  // Content overlay
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Placeholder Hero Title',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "This is placeholder text for the hero section.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              items: const [
+                {
+                  'image':
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                  'title': 'Essential Range - Over 20% OFF!',
+                  'subtitle':
+                      'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
+                  'button': 'BROWSE COLLECTION',
+                },
+                {
+                  'image':
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                  'title': 'New Arrivals',
+                  'subtitle': 'Check out our latest branded merch.',
+                  'button': 'SHOP NOW',
+                },
+                {
+                  'image':
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                  'title': 'Personalisation Service',
+                  'subtitle': 'Add your name or initials to select items.',
+                  'button': 'PERSONALISE',
+                },
+                {
+                  'image':
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                  'title': 'In-store Collection',
+                  'subtitle': 'Order online and collect from reception.',
+                  'button': 'FIND OUT MORE',
+                },
+              ],
+              onButtonTap: (item) {
+                // placeholder — navigation or action per slide
+              },
             ),
 
             // Products Section (static)
@@ -646,6 +613,199 @@ class AppFooter extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CarouselHero extends StatefulWidget {
+  final List<Map<String, String>> items;
+  final double height;
+  final void Function(Map<String, String>)? onButtonTap;
+
+  const CarouselHero({
+    super.key,
+    required this.items,
+    this.height = 400,
+    this.onButtonTap,
+  });
+
+  @override
+  State<CarouselHero> createState() => _CarouselHeroState();
+}
+
+class _CarouselHeroState extends State<CarouselHero> {
+  late final PageController _controller;
+  Timer? _timer;
+  int _index = 0;
+  bool _playing = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(initialPage: 0);
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+    if (!_playing) return;
+    _timer = Timer.periodic(const Duration(seconds: 4), (_) {
+      final next = (_index + 1) % widget.items.length;
+      _controller.animateToPage(next,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    });
+  }
+
+  void _togglePlay() {
+    setState(() {
+      _playing = !_playing;
+      if (_playing) {
+        _startTimer();
+      } else {
+        _timer?.cancel();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final items = widget.items;
+    return SizedBox(
+      height: widget.height,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          // Pages
+          PageView.builder(
+            controller: _controller,
+            itemCount: items.length,
+            onPageChanged: (i) => setState(() => _index = i),
+            itemBuilder: (context, i) {
+              final item = items[i];
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    item['image'] ?? '',
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) =>
+                        Container(color: Colors.grey[300]),
+                  ),
+                  Container(color: Colors.black.withOpacity(0.55)),
+                  // content overlay
+                  Positioned(
+                    left: 24,
+                    right: 24,
+                    top: widget.height * 0.18,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          item['title'] ?? '',
+                          style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          item['subtitle'] ?? '',
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () => widget.onButtonTap?.call(item),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                          ),
+                          child: Text(item['button'] ?? 'SHOP'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+
+          // Indicators + prev/next
+          Positioned(
+            bottom: 12,
+            left: 16,
+            right: 16,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.chevron_left, color: Colors.white),
+                  onPressed: () {
+                    final prev = (_index - 1 + items.length) % items.length;
+                    _controller.animateToPage(prev,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut);
+                  },
+                ),
+                Row(
+                  children: List.generate(items.length, (i) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      width: i == _index ? 10 : 8,
+                      height: i == _index ? 10 : 8,
+                      decoration: BoxDecoration(
+                        color: i == _index ? Colors.white : Colors.white54,
+                        shape: BoxShape.circle,
+                      ),
+                    );
+                  }),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.chevron_right, color: Colors.white),
+                  onPressed: () {
+                    final next = (_index + 1) % items.length;
+                    _controller.animateToPage(next,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut);
+                  },
+                ),
+                const SizedBox(width: 12),
+                // Play / Pause
+                ElevatedButton(
+                  onPressed: _togglePlay,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black45,
+                    foregroundColor: Colors.white,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(_playing ? Icons.pause : Icons.play_arrow, size: 16),
+                      const SizedBox(width: 6),
+                      Text(_playing ? 'Pause' : 'Play'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
