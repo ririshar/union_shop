@@ -291,6 +291,25 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            // Centered title for Signature Range (below the two featured products)
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+              child: const Center(
+                child: Text(
+                  'SIGNATURE RANGE',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            ),
+
             // Products Section (static)
             Container(
               color: Colors.white,
