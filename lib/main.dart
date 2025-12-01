@@ -226,19 +226,20 @@ class HomeScreen extends StatelessWidget {
                   'button': 'BROWSE COLLECTION',
                 },
                 {
-                  'image':'assets/images/yournamehoodie.png',
+                  'image': 'assets/images/yournamehoodie.png',
                   'title': 'The Print Shack',
-                  'subtitle': 'Lets create something uniquely you with our personalisation service - From£3 for one line of text!.',
+                  'subtitle':
+                      'Lets create something uniquely you with our personalisation service - From£3 for one line of text!.',
                   'button': 'FIND OUT MORE',
                 },
                 {
-                  'image':'assets/images/pizza.png',
+                  'image': 'assets/images/pizza.png',
                   'title': 'Hungry?',
                   'subtitle': 'We got this',
                   'button': 'ORDER DOMINOS PIZZA NOW',
                 },
                 {
-                  'image':'assets/images/flat.png',
+                  'image': 'assets/images/flat.png',
                   'title': 'Whats your next move?',
                   'subtitle': 'Are you staying with us?',
                   'button': 'FIND YOUR STUDENT ACCOMODATION',
@@ -287,8 +288,7 @@ class HomeScreen extends StatelessWidget {
                           title: 'Limited Edition Essential Zip Hoodie',
                           originalPrice: '£20.00',
                           price: '£14.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/pink.png',
                         ),
                       ),
                     ),
