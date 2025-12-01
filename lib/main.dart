@@ -219,8 +219,7 @@ class HomeScreen extends StatelessWidget {
               height: 400,
               items: const [
                 {
-                  'image':
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                  'image': 'assets/images/blueshirt.png',
                   'title': 'Essential Range - Over 20% OFF!',
                   'subtitle':
                       'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
