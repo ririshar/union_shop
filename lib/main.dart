@@ -226,9 +226,8 @@ class HomeScreen extends StatelessWidget {
                   'button': 'BROWSE COLLECTION',
                 },
                 {
-                  'image':
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                  'title': 'New Arrivals',
+                  'image':'assets/images/yournamehoodie.png',
+                  'title': 'The Print Shack',
                   'subtitle': 'Check out our latest branded merch.',
                   'button': 'SHOP NOW',
                 },
