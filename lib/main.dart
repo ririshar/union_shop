@@ -524,7 +524,7 @@ class _HomeTabState extends State<HomeTab> {
   }
 }
 
-// ProductCard unchanged (keeps existing behavior)
+// ProductCard updated to ensure single price (when no originalPrice) is black
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
@@ -550,60 +550,81 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // image
           Expanded(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+            child: imageUrl.startsWith('http')
+                ? Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported,
+                              color: Colors.grey),
+                        ),
+                      );
+                    },
+                  )
+                : Image.asset(
+                    imageUrl,
+                    fit: BoxFit.cover,
                   ),
-                );
-              },
-            ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(title,
+
+          // compact text + price area (reduced vertical gaps)
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 6.0, bottom: 0, left: 0, right: 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // title
+                Text(
+                  title,
                   style: const TextStyle(fontSize: 14, color: Colors.black),
-                  maxLines: 2),
-              const SizedBox(height: 4),
-              // Show crossed-out original price next to the new price when provided
-              if (originalPrice != null)
-                Row(
-                  children: [
-                    Text(
-                      originalPrice!,
-                      style: const TextStyle(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+
+                // make price appear directly under the title (very small gap)
+                const SizedBox(height: 4),
+
+                // Show crossed-out original price next to the new price when provided
+                if (originalPrice != null)
+                  Row(
+                    children: [
+                      Text(
+                        originalPrice!,
+                        style: const TextStyle(
                           fontSize: 13,
                           color: Colors.grey,
-                          decoration: TextDecoration.lineThrough),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      price,
-                      style: const TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        price,
+                        style: const TextStyle(
                           fontSize: 13,
                           color: Colors.black,
-                          fontWeight: FontWeight.w700),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Text(
+                    price,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: highlightPrice ? Colors.black : Colors.black,
+                      fontWeight:
+                          highlightPrice ? FontWeight.w700 : FontWeight.normal,
                     ),
-                  ],
-                )
-              else
-                Text(
-                  price,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: highlightPrice ? Colors.black : Colors.grey,
-                    fontWeight:
-                        highlightPrice ? FontWeight.w700 : FontWeight.normal,
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
