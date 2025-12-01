@@ -264,7 +264,8 @@ class HomeScreen extends StatelessWidget {
                         height: 320,
                         child: ProductCard(
                           title: 'Limited Edition Essential Zip Hoodie',
-                          price: '£45.00',
+                          originalPrice: '£20.00', // crossed out original price
+                          price: '£14.00', // sale price shown next to it
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
@@ -466,12 +467,15 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String imageUrl;
+  final String? originalPrice;
 
-  const ProductCard(
-      {super.key,
-      required this.title,
-      required this.price,
-      required this.imageUrl});
+  const ProductCard({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    this.originalPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -504,8 +508,30 @@ class ProductCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 14, color: Colors.black),
                   maxLines: 2),
               const SizedBox(height: 4),
-              Text(price,
-                  style: const TextStyle(fontSize: 13, color: Colors.grey)),
+              // Show crossed-out original price next to the new price when provided
+              if (originalPrice != null)
+                Row(
+                  children: [
+                    Text(
+                      originalPrice!,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      price,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                )
+              else
+                Text(price,
+                    style: const TextStyle(fontSize: 13, color: Colors.grey)),
             ],
           ),
         ],
