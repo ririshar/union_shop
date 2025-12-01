@@ -302,8 +302,7 @@ class HomeScreen extends StatelessWidget {
                           title: 'Essential T-Shirt',
                           originalPrice: '£10.00',
                           price: '£6.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/pink_tshirt.png',
                         ),
                       ),
                     ),
@@ -348,8 +347,7 @@ class HomeScreen extends StatelessWidget {
                         child: ProductCard(
                           title: 'Signature Hoodie',
                           price: '£32.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/shoodie.png',
                           highlightPrice: true,
                         ),
                       ),
