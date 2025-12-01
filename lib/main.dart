@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/clothing_page.dart'; // add near other imports
 
 void main() {
   runApp(const UnionShopApp());
@@ -21,6 +22,7 @@ class UnionShopApp extends StatelessWidget {
       routes: {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutScreen(),
+        '/shop/clothing': (context) => const ClothingPage(),
       },
     );
   }
@@ -361,7 +363,7 @@ class HomeScreen extends StatelessWidget {
                         child: ProductCard(
                           title: 'Signature T-Shirt',
                           price: '£14.99',
-                          imageUrl: 'assets/sshirt.png',
+                          imageUrl: 'assets/images/sshirt.png',
                           highlightPrice: true,
                         ),
                       ),
@@ -395,7 +397,7 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Portsmouth City Postcard',
                           price: '£1.00',
-                          imageUrl:'assets/images/postcard.png', 
+                          imageUrl: 'assets/images/postcard.png',
                         ),
                         ProductCard(
                           title: 'Portsmouth City Magnet',
@@ -411,8 +413,7 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Portsmouth City Notebook',
                           price: '£7.50',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/notebook.png',
                         ),
                       ],
                     ),

@@ -27,5 +27,7 @@ flutter:
     - assets/images/pink.png
     - assets/images/pink_tshirt.png
     - assets/images/shoodie.png
-    - assets/sshirt.png
+    - assets/images/sshirt.png
     - assets/images/postcard.png
+    - assets/images/bookmark.png
+    - assets/images/notebook.png
