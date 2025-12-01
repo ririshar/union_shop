@@ -361,8 +361,7 @@ class HomeScreen extends StatelessWidget {
                         child: ProductCard(
                           title: 'Signature T-Shirt',
                           price: '£14.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/sshirt.png',
                           highlightPrice: true,
                         ),
                       ),
