@@ -310,6 +310,47 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            // Signature products: two large products centered and closer together
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(maxWidth: 420, minWidth: 300),
+                      child: const SizedBox(
+                        height: 320,
+                        child: ProductCard(
+                          title: 'Signature Hoodie',
+                          price: '£49.00',
+                          imageUrl:
+                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(maxWidth: 420, minWidth: 300),
+                      child: const SizedBox(
+                        height: 320,
+                        child: ProductCard(
+                          title: 'Signature T-Shirt',
+                          price: '£22.00',
+                          imageUrl:
+                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             // Products Section (static)
             Container(
               color: Colors.white,
