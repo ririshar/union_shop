@@ -228,12 +228,11 @@ class HomeScreen extends StatelessWidget {
                 {
                   'image':'assets/images/yournamehoodie.png',
                   'title': 'The Print Shack',
-                  'subtitle': 'Check out our latest branded merch.',
-                  'button': 'SHOP NOW',
+                  'subtitle': 'Lets create something uniquely you with our personalisation service - From£3 for one line of text!.',
+                  'button': 'FIND OUT MORE',
                 },
                 {
-                  'image':
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                  'image':'assets/images/pizza.png',
                   'title': 'Personalisation Service',
                   'subtitle': 'Add your name or initials to select items.',
                   'button': 'PERSONALISE',
