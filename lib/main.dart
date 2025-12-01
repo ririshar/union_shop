@@ -328,6 +328,7 @@ class HomeScreen extends StatelessWidget {
                           price: '£32.99',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          highlightPrice: true,
                         ),
                       ),
                     ),
@@ -342,6 +343,7 @@ class HomeScreen extends StatelessWidget {
                           price: '£14.99',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          highlightPrice: true,
                         ),
                       ),
                     ),
@@ -528,6 +530,7 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String imageUrl;
   final String? originalPrice;
+  final bool highlightPrice;
 
   const ProductCard({
     super.key,
@@ -535,6 +538,7 @@ class ProductCard extends StatelessWidget {
     required this.price,
     required this.imageUrl,
     this.originalPrice,
+    this.highlightPrice = false,
   });
 
   @override
@@ -590,8 +594,15 @@ class ProductCard extends StatelessWidget {
                   ],
                 )
               else
-                Text(price,
-                    style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                Text(
+                  price,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: highlightPrice ? Colors.black : Colors.grey,
+                    fontWeight:
+                        highlightPrice ? FontWeight.w700 : FontWeight.normal,
+                  ),
+                ),
             ],
           ),
         ],
