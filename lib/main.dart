@@ -94,9 +94,25 @@ class TopHeader extends StatelessWidget {
                     isActive: activeLabel == 'Home',
                   ),
                   const SizedBox(width: 8),
-                  HomeTab(
-                    label: 'Shop',
-                    onTap: placeholderCallbackForButtons,
+                  // Shop dropdown (replaces simple Shop HomeTab)
+                  ShopDropdown(
+                    onSelect: (key) {
+                      // handle navigation keys here — update to real routes if available
+                      switch (key) {
+                        case 'clothing':
+                        case 'merchandise':
+                        case 'halloween':
+                        case 'signature':
+                        case 'portsmouth':
+                        case 'pride':
+                        case 'graduation':
+                          // placeholder callback if you don't have routes yet
+                          placeholderCallbackForButtons();
+                          break;
+                        default:
+                          placeholderCallbackForButtons();
+                      }
+                    },
                     isActive: activeLabel == 'Shop',
                   ),
                   const SizedBox(width: 8),
@@ -1232,6 +1248,100 @@ class NavSquare extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ShopDropdown extends StatefulWidget {
+  final void Function(String) onSelect;
+  final bool isActive;
+
+  const ShopDropdown({
+    super.key,
+    required this.onSelect,
+    this.isActive = false,
+  });
+
+  @override
+  _ShopDropdownState createState() => _ShopDropdownState();
+}
+
+class _ShopDropdownState extends State<ShopDropdown> {
+  bool _hovering = false;
+
+  void _setHover(bool v) {
+    if (_hovering == v) return;
+    setState(() {
+      _hovering = v;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bool underline = _hovering || widget.isActive;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => _setHover(true),
+      onExit: (_) => _setHover(false),
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Shop',
+                style: TextStyle(
+                  color: const Color(0xFF4d2963),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 13,
+                  decoration: underline
+                      ? TextDecoration.underline
+                      : TextDecoration.none,
+                  decorationColor: const Color(0xFF4d2963),
+                  decorationThickness: 1.6,
+                ),
+              ),
+              if (_hovering)
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildDropdownItem('Clothing', 'clothing'),
+                      _buildDropdownItem('Merchandise', 'merchandise'),
+                      _buildDropdownItem('Halloween', 'halloween'),
+                      _buildDropdownItem('Signature Range', 'signature'),
+                      _buildDropdownItem('Portsmouth City', 'portsmouth'),
+                      _buildDropdownItem('Pride', 'pride'),
+                      _buildDropdownItem('Graduation', 'graduation'),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropdownItem(String label, String key) {
+    return GestureDetector(
+      onTap: () => widget.onSelect(key),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 13,
+            color: Color(0xFF4d2963),
+          ),
+        ),
       ),
     );
   }
