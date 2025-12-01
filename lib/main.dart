@@ -395,8 +395,7 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Portsmouth City Postcard',
                           price: '£1.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                          imageUrl:'assets/images/postcard.png', 
                         ),
                         ProductCard(
                           title: 'Portsmouth City Magnet',
@@ -407,8 +406,7 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Portsmouth City Bookmark',
                           price: '£3.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/bookmark.png',
                         ),
                         ProductCard(
                           title: 'Portsmouth City Notebook',
