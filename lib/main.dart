@@ -1254,17 +1254,13 @@ class NavSquare extends StatelessWidget {
 }
 
 class ShopDropdown extends StatefulWidget {
-  final void Function(String) onSelect;
+  final void Function(String key) onSelect;
   final bool isActive;
-
-  const ShopDropdown({
-    super.key,
-    required this.onSelect,
-    this.isActive = false,
-  });
+  const ShopDropdown(
+      {super.key, required this.onSelect, this.isActive = false});
 
   @override
-  _ShopDropdownState createState() => _ShopDropdownState();
+  State<ShopDropdown> createState() => _ShopDropdownState();
 }
 
 class _ShopDropdownState extends State<ShopDropdown> {
@@ -1284,62 +1280,39 @@ class _ShopDropdownState extends State<ShopDropdown> {
       cursor: SystemMouseCursors.click,
       onEnter: (_) => _setHover(true),
       onExit: (_) => _setHover(false),
-      child: GestureDetector(
-        onTap: () {},
+      child: PopupMenuButton<String>(
+        offset: const Offset(0, 6),
+        color: Colors.white,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        onSelected: (key) => widget.onSelect(key),
+        itemBuilder: (ctx) => <PopupMenuEntry<String>>[
+          const PopupMenuItem(value: 'clothing', child: Text('Clothing')),
+          const PopupMenuItem(value: 'merchandise', child: Text('Merchandise')),
+          const PopupMenuItem(value: 'halloween', child: Text('Halloween 🎃')),
+          const PopupMenuItem(
+              value: 'signature', child: Text('Signature & Essential Range')),
+          const PopupMenuItem(
+              value: 'portsmouth', child: Text('Portsmouth City Collection')),
+          const PopupMenuItem(
+              value: 'pride', child: Text('Pride Collection 🏳️‍🌈')),
+          const PopupMenuItem(
+              value: 'graduation', child: Text('Graduation 🎓')),
+        ],
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           color: Colors.transparent,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Shop',
-                style: TextStyle(
-                  color: const Color(0xFF4d2963),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                  decoration: underline
-                      ? TextDecoration.underline
-                      : TextDecoration.none,
-                  decorationColor: const Color(0xFF4d2963),
-                  decorationThickness: 1.6,
-                ),
-              ),
-              if (_hovering)
-                Container(
-                  margin: const EdgeInsets.only(top: 4),
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildDropdownItem('Clothing', 'clothing'),
-                      _buildDropdownItem('Merchandise', 'merchandise'),
-                      _buildDropdownItem('Halloween', 'halloween'),
-                      _buildDropdownItem('Signature Range', 'signature'),
-                      _buildDropdownItem('Portsmouth City', 'portsmouth'),
-                      _buildDropdownItem('Pride', 'pride'),
-                      _buildDropdownItem('Graduation', 'graduation'),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDropdownItem(String label, String key) {
-    return GestureDetector(
-      onTap: () => widget.onSelect(key),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 13,
-            color: Color(0xFF4d2963),
+          child: Text(
+            'Shop',
+            style: TextStyle(
+              color: const Color(0xFF4d2963),
+              fontWeight: FontWeight.w400,
+              fontSize: 13,
+              decoration:
+                  underline ? TextDecoration.underline : TextDecoration.none,
+              decorationColor: const Color(0xFF4d2963),
+              decorationThickness: 1.6,
+            ),
           ),
         ),
       ),
