@@ -238,11 +238,10 @@ class HomeScreen extends StatelessWidget {
                   'button': 'ORDER DOMINOS PIZZA NOW',
                 },
                 {
-                  'image':
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                  'title': 'In-store Collection',
-                  'subtitle': 'Order online and collect from reception.',
-                  'button': 'FIND OUT MORE',
+                  'image':'assets/images/flat.png',
+                  'title': 'Whats your next move?',
+                  'subtitle': 'Are you staying with us?',
+                  'button': 'FIND YOUR STUDENT ACCOMODATION',
                 },
               ],
               onButtonTap: (item) {
