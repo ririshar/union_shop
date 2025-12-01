@@ -233,9 +233,9 @@ class HomeScreen extends StatelessWidget {
                 },
                 {
                   'image':'assets/images/pizza.png',
-                  'title': 'Personalisation Service',
-                  'subtitle': 'Add your name or initials to select items.',
-                  'button': 'PERSONALISE',
+                  'title': 'Hungry?',
+                  'subtitle': 'We got this',
+                  'button': 'ORDER DOMINOS PIZZA NOW',
                 },
                 {
                   'image':
