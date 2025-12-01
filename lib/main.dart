@@ -352,6 +352,55 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            // Quick navigation squares (4) — replace imageUrl and onTap as needed
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final width = constraints.maxWidth;
+                  final crossAxisCount =
+                      width > 900 ? 4 : (width > 600 ? 2 : 1);
+                  return GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: crossAxisCount,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 1, // make each tile square
+                    children: [
+                      // Tile 1
+                      NavSquare(
+                        imageUrl: 'assets/images/square1.jpg', // replace
+                        label: 'Apparel',
+                        onTap: () => Navigator.of(context).pushNamed('/shop'),
+                      ),
+                      // Tile 2
+                      NavSquare(
+                        imageUrl: 'assets/images/square2.jpg', // replace
+                        label: 'Collections',
+                        onTap: () =>
+                            Navigator.of(context).pushNamed('/collection'),
+                      ),
+                      // Tile 3
+                      NavSquare(
+                        imageUrl: 'assets/images/square3.jpg', // replace
+                        label: 'Personalisation',
+                        onTap: () =>
+                            Navigator.of(context).pushNamed('/printshack'),
+                      ),
+                      // Tile 4
+                      NavSquare(
+                        imageUrl: 'assets/images/square4.jpg', // replace
+                        label: 'Contact / Info',
+                        onTap: () => Navigator.of(context).pushNamed('/about'),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+
             // Products Section (static)
             Container(
               color: Colors.white,
@@ -1033,6 +1082,55 @@ class _CarouselHeroState extends State<CarouselHero> {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NavSquare extends StatelessWidget {
+  final String imageUrl;
+  final String label;
+  final VoidCallback onTap;
+
+  const NavSquare({
+    super.key,
+    required this.imageUrl,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Image.asset(
+              imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[300],
+                  child: const Center(
+                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
