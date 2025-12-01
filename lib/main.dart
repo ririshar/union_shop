@@ -247,7 +247,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Featured products: two large products centered and closer together
+            // Featured products: two large products centered and spaced the same as Signature Range
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
@@ -256,7 +256,6 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // limit each product width so they don't stretch full width
                     ConstrainedBox(
                       constraints:
                           const BoxConstraints(maxWidth: 420, minWidth: 300),
@@ -264,14 +263,14 @@ class HomeScreen extends StatelessWidget {
                         height: 320,
                         child: ProductCard(
                           title: 'Limited Edition Essential Zip Hoodie',
-                          originalPrice: '£20.00', // crossed out original price
-                          price: '£14.00', // sale price shown next to it
+                          originalPrice: '£20.00',
+                          price: '£14.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12), // closer gap
+                    const SizedBox(width: 12),
                     ConstrainedBox(
                       constraints:
                           const BoxConstraints(maxWidth: 420, minWidth: 300),
@@ -279,8 +278,8 @@ class HomeScreen extends StatelessWidget {
                         height: 320,
                         child: ProductCard(
                           title: 'Essential T-Shirt',
-                          originalPrice: '£10.00', // crossed-out original price
-                          price: '£6.00', // sale price shown next to it
+                          originalPrice: '£10.00',
+                          price: '£6.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
@@ -326,7 +325,7 @@ class HomeScreen extends StatelessWidget {
                         height: 320,
                         child: ProductCard(
                           title: 'Signature Hoodie',
-                          price: '£49.00',
+                          price: '£32.99',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
@@ -340,7 +339,7 @@ class HomeScreen extends StatelessWidget {
                         height: 320,
                         child: ProductCard(
                           title: 'Signature T-Shirt',
-                          price: '£22.00',
+                          price: '£14.99',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
