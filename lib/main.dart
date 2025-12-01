@@ -399,6 +399,31 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+
+                    const SizedBox(height: 24),
+
+                    // Centered "VIEW ALL" button (dark purple, white bold text)
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // TODO: navigate to full collection page
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF4d2963),
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 28, vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        child: const Text(
+                          'VIEW ALL',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, letterSpacing: 1),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
