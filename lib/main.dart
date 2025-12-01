@@ -448,7 +448,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
 
-                    // Quick navigation squares (4) — replace imageUrl and onTap as needed
+                    // Quick navigation squares (4) — moved here under OUR RANGE
                     Container(
                       color: Colors.white,
                       padding: const EdgeInsets.symmetric(
@@ -464,36 +464,28 @@ class HomeScreen extends StatelessWidget {
                             crossAxisCount: crossAxisCount,
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
-                            childAspectRatio: 1, // make each tile square
+                            childAspectRatio: 1,
                             children: [
-                              // Tile 1
                               NavSquare(
-                                imageUrl:
-                                    'assets/images/square1.jpg', // replace
+                                imageUrl: 'assets/images/square1.jpg',
                                 label: 'Apparel',
                                 onTap: () =>
                                     Navigator.of(context).pushNamed('/shop'),
                               ),
-                              // Tile 2
                               NavSquare(
-                                imageUrl:
-                                    'assets/images/square2.jpg', // replace
+                                imageUrl: 'assets/images/square2.jpg',
                                 label: 'Collections',
                                 onTap: () => Navigator.of(context)
                                     .pushNamed('/collection'),
                               ),
-                              // Tile 3
                               NavSquare(
-                                imageUrl:
-                                    'assets/images/square3.jpg', // replace
+                                imageUrl: 'assets/images/square3.jpg',
                                 label: 'Personalisation',
                                 onTap: () => Navigator.of(context)
                                     .pushNamed('/printshack'),
                               ),
-                              // Tile 4
                               NavSquare(
-                                imageUrl:
-                                    'assets/images/square4.jpg', // replace
+                                imageUrl: 'assets/images/square4.jpg',
                                 label: 'Contact / Info',
                                 onTap: () =>
                                     Navigator.of(context).pushNamed('/about'),
