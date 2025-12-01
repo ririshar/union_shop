@@ -424,6 +424,29 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                    // gap under the button
+                    const SizedBox(height: 40),
+
+                    // Centered title 'OUR RANGE'
+                    Container(
+                      width: double.infinity,
+                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 24, horizontal: 16),
+                      child: const Center(
+                        child: Text(
+                          'OUR RANGE',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
