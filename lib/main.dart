@@ -247,36 +247,45 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Featured products: two large products side-by-side filling the row
+            // Featured products: two large products centered and closer together
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-              child: const Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 320,
-                      child: ProductCard(
-                        title: 'Limited Edition Essential Zip Hoodie',
-                        price: '£45.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // limit each product width so they don't stretch full width
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(maxWidth: 420, minWidth: 300),
+                      child: const SizedBox(
+                        height: 320,
+                        child: ProductCard(
+                          title: 'Limited Edition Essential Zip Hoodie',
+                          price: '£45.00',
+                          imageUrl:
+                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 24),
-                  Expanded(
-                    child: SizedBox(
-                      height: 320,
-                      child: ProductCard(
-                        title: 'Essential T-Shirt',
-                        price: '£20.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                    const SizedBox(width: 12), // closer gap
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(maxWidth: 420, minWidth: 300),
+                      child: const SizedBox(
+                        height: 320,
+                        child: ProductCard(
+                          title: 'Essential T-Shirt',
+                          price: '£20.00',
+                          imageUrl:
+                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
 
