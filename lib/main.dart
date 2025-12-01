@@ -227,6 +227,25 @@ class HomeScreen extends StatelessWidget {
               },
             ),
 
+            // Centered title row under the slideshow
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              child: const Center(
+                child: Text(
+                  'ESSENTIAL RANGE - OVER 20% OFF!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            ),
+
             // Products Section (static)
             Container(
               color: Colors.white,
@@ -699,6 +718,7 @@ class _CarouselHeroState extends State<CarouselHero> {
                     errorBuilder: (_, __, ___) =>
                         Container(color: Colors.grey[300]),
                   ),
+                  // ignore: deprecated_member_use
                   Container(color: Colors.black.withOpacity(0.55)),
                   // content overlay
                   Positioned(
