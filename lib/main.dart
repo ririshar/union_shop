@@ -116,9 +116,19 @@ class TopHeader extends StatelessWidget {
                     isActive: activeLabel == 'Shop',
                   ),
                   const SizedBox(width: 8),
-                  HomeTab(
-                    label: 'The Print Shack',
-                    onTap: placeholderCallbackForButtons,
+                  PrintShackDropdown(
+                    onSelect: (key) {
+                      switch (key) {
+                        case 'about':
+                          Navigator.of(context).pushNamed('/about');
+                          break;
+                        case 'personalisation':
+                          Navigator.of(context).pushNamed('/printshack');
+                          break;
+                        default:
+                          placeholderCallbackForButtons();
+                      }
+                    },
                     isActive: activeLabel == 'The Print Shack',
                   ),
                   const SizedBox(width: 8),
@@ -1304,6 +1314,65 @@ class _ShopDropdownState extends State<ShopDropdown> {
           color: Colors.transparent,
           child: Text(
             'Shop',
+            style: TextStyle(
+              color: const Color(0xFF4d2963),
+              fontWeight: FontWeight.w400,
+              fontSize: 13,
+              decoration:
+                  underline ? TextDecoration.underline : TextDecoration.none,
+              decorationColor: const Color(0xFF4d2963),
+              decorationThickness: 1.6,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PrintShackDropdown extends StatefulWidget {
+  final void Function(String key) onSelect;
+  final bool isActive;
+  const PrintShackDropdown(
+      {super.key, required this.onSelect, this.isActive = false});
+
+  @override
+  State<PrintShackDropdown> createState() => _PrintShackDropdownState();
+}
+
+class _PrintShackDropdownState extends State<PrintShackDropdown> {
+  bool _hovering = false;
+
+  void _setHover(bool v) {
+    if (_hovering == v) return;
+    setState(() {
+      _hovering = v;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bool underline = _hovering || widget.isActive;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => _setHover(true),
+      onExit: (_) => _setHover(false),
+      child: PopupMenuButton<String>(
+        offset: const Offset(0, 6),
+        color: Colors.white,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        onSelected: (key) => widget.onSelect(key),
+        itemBuilder: (ctx) => <PopupMenuEntry<String>>[
+          const PopupMenuItem(value: 'about', child: Text('About')),
+          const PopupMenuItem(
+              value: 'personalisation', child: Text('Personalisation')),
+        ],
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          color: Colors.transparent,
+          child: Text(
+            'The Print Shack',
             style: TextStyle(
               color: const Color(0xFF4d2963),
               fontWeight: FontWeight.w400,
