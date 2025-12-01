@@ -227,11 +227,12 @@ class HomeScreen extends StatelessWidget {
               },
             ),
 
-            // Centered title row under the slideshow
+            // add extra spacing from carousel
+            const SizedBox(height: 28),
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
               child: const Center(
                 child: Text(
                   'ESSENTIAL RANGE - OVER 20% OFF!',
