@@ -279,7 +279,8 @@ class HomeScreen extends StatelessWidget {
                         height: 320,
                         child: ProductCard(
                           title: 'Essential T-Shirt',
-                          price: '£20.00',
+                          originalPrice: '£10.00', // crossed-out original price
+                          price: '£6.00', // sale price shown next to it
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
