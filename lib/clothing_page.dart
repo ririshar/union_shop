@@ -200,26 +200,42 @@ class _ClothingPageState extends State<ClothingPage> {
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.only(bottom: 40.0, top: 32.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const IconButton(
-                    icon: Icon(Icons.chevron_left, color: Colors.grey),
-                    onPressed: null, // first page: can't go back
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(32, 32),
+                      padding: EdgeInsets.zero,
+                    ),
+                    onPressed: null, // first page: no back
+                    child: const Icon(
+                      Icons.chevron_left,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 16),
                   const Text(
-                    '1 of 2',
-                    style: TextStyle(fontSize: 13),
+                    'Page 1 of 2',
+                    style: TextStyle(fontSize: 12),
                   ),
-                  const SizedBox(width: 8),
-                  IconButton(
-                    icon: const Icon(Icons.chevron_right),
+                  const SizedBox(width: 16),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(32, 32),
+                      padding: EdgeInsets.zero,
+                    ),
                     onPressed: () {
                       Navigator.of(context)
                           .pushReplacementNamed('/shop/clothing/page-2');
                     },
+                    child: const Icon(
+                      Icons.chevron_right,
+                      size: 16,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),

@@ -1,7 +1,7 @@
 //// dart
-// filepath: c:\Users\riris\Desktop\Union shop\union_shop\lib\clothing_page_two.dart
+// filepath: c:\Users\riris\Desktop\Union shop\union_shop\lib\clothing_page2.dart
 import 'package:flutter/material.dart';
-import 'package:union_shop/main.dart'; // for TopHeader, ProductCard, AppFooter
+import 'package:union_shop/main.dart';
 
 class ClothingPageTwo extends StatefulWidget {
   const ClothingPageTwo({super.key});
@@ -37,12 +37,15 @@ class _ClothingPageTwoState extends State<ClothingPageTwo> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Same top header as page 1
             TopHeader(
               activeLabel: 'Shop',
               placeholderCallbackForButtons: _placeholderCallbackForButtons,
             ),
 
             const SizedBox(height: 40),
+
+            // "Clothing" title – same as page 1
             Container(
               width: double.infinity,
               color: Colors.white,
@@ -63,156 +66,188 @@ class _ClothingPageTwoState extends State<ClothingPageTwo> {
 
             const SizedBox(height: 24),
 
-            // FILTER / SORT BAR
+            // FILTER / SORT row – copy of page 1 (adjust horizontal padding to match)
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
+                  const EdgeInsets.symmetric(horizontal: 180.0, vertical: 8),
               child: Row(
                 children: [
                   const Text(
                     'FILTER BY  ',
-                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                    style: TextStyle(fontSize: 10, color: Colors.black54),
                   ),
                   DropdownButton<String>(
                     value: _selectedFilter,
                     items: _filterOptions
-                        .map((value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(fontSize: 12),
-                              ),
-                            ))
+                        .map(
+                          (value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: const TextStyle(fontSize: 10),
+                            ),
+                          ),
+                        )
                         .toList(),
+                    isDense: true,
                     underline: const SizedBox.shrink(),
                     onChanged: (value) {
                       if (value == null) return;
-                      setState(() {
-                        _selectedFilter = value;
-                      });
+                      setState(() => _selectedFilter = value);
                     },
                   ),
                   const Spacer(),
                   const Text(
                     'SORT BY  ',
-                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                    style: TextStyle(fontSize: 10, color: Colors.black54),
                   ),
                   DropdownButton<String>(
                     value: _selectedSort,
                     items: _sortOptions
-                        .map((value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(fontSize: 12),
-                              ),
-                            ))
+                        .map(
+                          (value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: const TextStyle(fontSize: 10),
+                            ),
+                          ),
+                        )
                         .toList(),
+                    isDense: true,
                     underline: const SizedBox.shrink(),
                     onChanged: (value) {
                       if (value == null) return;
-                      setState(() {
-                        _selectedSort = value;
-                      });
+                      setState(() => _selectedSort = value);
                     },
                   ),
                   const Spacer(),
                   const Text(
                     '18 products',
-                    style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
 
-            // GRID WITH DIFFERENT PRODUCTS
+            // GRID – same layout (padding, spacing, columns) as page 1
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+              padding: const EdgeInsets.symmetric(horizontal: 180, vertical: 0),
               child: GridView.count(
-                crossAxisCount: MediaQuery.of(context).size.width > 900
-                    ? 3
-                    : (MediaQuery.of(context).size.width > 600 ? 2 : 1),
-                crossAxisSpacing: 24,
-                mainAxisSpacing: 32,
-                childAspectRatio: 3 / 4,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: MediaQuery.of(context).size.width > 900 ? 3 : 1,
+                crossAxisSpacing: 32,
+                mainAxisSpacing: 40,
+                childAspectRatio: 3 / 4,
                 children: const [
+                  // Row 1
                   ProductCard(
-                    title: 'Limited Edition Hoodie',
-                    price: '£29.99',
-                    imageUrl: 'assets/images/purple_hoodie.png',
+                    title: 'Heavyweight Shorts',
+                    originalPrice: '£30.00',
+                    price: '£12.99',
+                    imageUrl: 'assets/images/heavy_shorts.png',
                   ),
                   ProductCard(
-                    title: 'Logo Sweatshirt',
-                    price: '£24.99',
-                    imageUrl: 'assets/images/green_sweatshirt.png',
+                    title: 'Ladies Athletic Leggings',
+                    originalPrice: '£28.00',
+                    price: '£12.99',
+                    imageUrl: 'assets/images/leggings.png',
                   ),
                   ProductCard(
-                    title: 'Logo T-Shirt',
-                    price: '£13.00',
-                    imageUrl: 'assets/images/black_tshirt.png',
+                    title: 'Signature Hoodie',
+                    price: '£32.99',
+                    imageUrl: 'assets/images/signature_hoodie.png',
+                  ),
+
+                  // Row 2
+                  ProductCard(
+                    title: 'Essential T-Shirt',
+                    originalPrice: '£10.00',
+                    price: '£6.99',
+                    imageUrl: 'assets/images/essential_tshirt.png',
                   ),
                   ProductCard(
-                    title: 'Varsity Jacket',
-                    price: '£40.00',
-                    imageUrl: 'assets/images/grey_hoodie.png',
+                    title: 'Limited Edition Essential Zip Hoodies',
+                    originalPrice: '£22.00',
+                    price: '£14.99',
+                    imageUrl: 'assets/images/zip_pink.png',
                   ),
                   ProductCard(
-                    title: 'Sport Hoodie',
-                    price: '£36.00',
-                    imageUrl: 'assets/images/white_tshirt.png',
+                    title: 'Waterproof Poncho',
+                    price: '£1.99',
+                    imageUrl: 'assets/images/poncho.png',
+                  ),
+
+                  // Row 3
+                  ProductCard(
+                    title: 'Classic Hoodies - Burgundy',
+                    originalPrice: '£25.00',
+                    price: '£12.00',
+                    imageUrl: 'assets/images/burgundy_hoodie.png',
                   ),
                   ProductCard(
-                    title: 'Sport T-Shirt',
-                    price: '£18.00',
-                    imageUrl: 'assets/images/navy_sweatshirt.png',
+                    title: 'Signature T-Shirt',
+                    price: '£14.99',
+                    imageUrl: 'assets/images/sig_tshirt_blue.png',
                   ),
                   ProductCard(
-                    title: 'Scarf',
-                    price: '£14.00',
-                    imageUrl: 'assets/images/zip_hoodie.png',
-                  ),
-                  ProductCard(
-                    title: 'Mittens',
-                    price: '£9.50',
-                    imageUrl: 'assets/images/crew_sweatshirt.png',
-                  ),
-                  ProductCard(
-                    title: 'Winter Bundle',
-                    originalPrice: '£50.00',
-                    price: '£39.99',
-                    imageUrl: 'assets/images/logo_tshirt.png',
+                    title: 'Limited Edition UoP Beanies',
+                    price: '£7.50',
+                    imageUrl: 'assets/images/beanies.png',
                   ),
                 ],
               ),
             ),
 
-            // PAGER: 2 of 2 (back arrow active, next disabled)
+            const SizedBox(height: 32),
+
+            // PAGER – same style as page 1, but "Page 2 of 2" and only left active
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.only(bottom: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.chevron_left),
+                  // Back to page 1
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(32, 32),
+                      padding: EdgeInsets.zero,
+                    ),
                     onPressed: () {
                       Navigator.of(context)
                           .pushReplacementNamed('/shop/clothing');
                     },
+                    child: const Icon(
+                      Icons.chevron_left,
+                      size: 16,
+                      color: Colors.black,
+                    ),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 16),
                   const Text(
-                    '2 of 2',
-                    style: TextStyle(fontSize: 13),
+                    'Page 2 of 2',
+                    style: TextStyle(fontSize: 12),
                   ),
-                  const SizedBox(width: 8),
-                  const IconButton(
-                    icon: Icon(Icons.chevron_right, color: Colors.grey),
+                  const SizedBox(width: 16),
+                  // Right arrow disabled on last page
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(32, 32),
+                      padding: EdgeInsets.zero,
+                    ),
                     onPressed: null,
+                    child: const Icon(
+                      Icons.chevron_right,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
                   ),
                 ],
               ),
