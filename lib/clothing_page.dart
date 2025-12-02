@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/main.dart';
 
-class ClothingPage extends StatelessWidget {
+class ClothingPage extends StatefulWidget {
   const ClothingPage({super.key});
 
-  void _placeholderCallbackForButtons() {
-    // same placeholder as HomeScreen / AboutScreen
-  }
+  @override
+  State<ClothingPage> createState() => _ClothingPageState();
+}
+
+class _ClothingPageState extends State<ClothingPage> {
+  void _placeholderCallbackForButtons() {}
+
+  String _selectedFilter = 'All products';
+  String _selectedSort = 'Featured';
+
+  final List<String> _filterOptions = [
+    'All products',
+    'Hoodies',
+    'Sweatshirts',
+    'T-Shirts',
+    'Accessories',
+  ];
+
+  final List<String> _sortOptions = [
+    'Featured',
+    'Price: Low to High',
+    'Price: High to Low',
+    'Alphabetical',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +35,12 @@ class ClothingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header (includes purple banner + logo + nav, same as homepage)
+            // Header
             TopHeader(
-              activeLabel: 'Shop', // underline “Shop”
+              activeLabel: 'Shop',
               placeholderCallbackForButtons: _placeholderCallbackForButtons,
             ),
 
-            // 3) Clothing title (centered, like screenshot)
             const SizedBox(height: 40),
             Container(
               width: double.infinity,
@@ -42,22 +62,61 @@ class ClothingPage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Simple filter/sort row (text only, to mimic layout)
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
+            // FILTER / SORT BAR WITH DROPDOWNS
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
               child: Row(
                 children: [
-                  Text(
-                    'FILTER BY   All products',
+                  const Text(
+                    'FILTER BY  ',
                     style: TextStyle(fontSize: 12, color: Colors.black54),
                   ),
-                  Spacer(),
-                  Text(
-                    'SORT BY   Featured',
+                  DropdownButton<String>(
+                    value: _selectedFilter,
+                    items: _filterOptions
+                        .map((value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(fontSize: 12),
+                              ),
+                            ))
+                        .toList(),
+                    underline: const SizedBox.shrink(),
+                    onChanged: (value) {
+                      if (value == null) return;
+                      setState(() {
+                        _selectedFilter = value;
+                      });
+                    },
+                  ),
+                  const Spacer(),
+                  const Text(
+                    'SORT BY  ',
                     style: TextStyle(fontSize: 12, color: Colors.black54),
                   ),
-                  Spacer(),
-                  Text(
+                  DropdownButton<String>(
+                    value: _selectedSort,
+                    items: _sortOptions
+                        .map((value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(fontSize: 12),
+                              ),
+                            ))
+                        .toList(),
+                    underline: const SizedBox.shrink(),
+                    onChanged: (value) {
+                      if (value == null) return;
+                      setState(() {
+                        _selectedSort = value;
+                      });
+                    },
+                  ),
+                  const Spacer(),
+                  const Text(
                     '18 products',
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
