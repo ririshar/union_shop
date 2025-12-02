@@ -1,164 +1,164 @@
 import 'package:flutter/material.dart';
+import 'main.dart'; // for TopHeader and AppFooter
 
 class GraduationPage extends StatelessWidget {
   const GraduationPage({super.key});
+
+  void _placeholder() {}
 
   @override
   Widget build(BuildContext context) {
     final products = _graduationProducts;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xFF592C82), // purple bar like site
-        title: const Text(
-          'The UNION',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-        ),
-        centerTitle: false,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Icon(Icons.search, color: Colors.white),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.shopping_bag_outlined, color: Colors.white),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          // HERO IMAGE + TITLE
-          SizedBox(
-            height: 220,
-            width: double.infinity,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.asset(
-                  'assets/images/graduation_hero.jpg', // supply your own
-                  fit: BoxFit.cover,
-                ),
-                Container(
-                  // ignore: deprecated_member_use
-                  color: Colors.black.withOpacity(0.2),
-                ),
-                Center(
-                  child: Text(
-                    'Graduation',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.4,
-                        ),
-                  ),
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // same top bar + nav as other pages
+            TopHeader(
+              activeLabel: 'Shop',
+              placeholderCallbackForButtons: _placeholder,
             ),
-          ),
 
-          const Divider(height: 1),
-
-          // FILTER / SORT BAR + PRODUCT COUNT
-          Container(
-            color: Colors.white,
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        'FILTER BY',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey.shade600,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      DropdownButton<String>(
-                        value: 'All products',
-                        underline: const SizedBox(),
-                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'All products',
-                            child: Text('All products'),
-                          ),
-                        ],
-                        onChanged: (_) {},
-                      ),
-                    ],
+            // HERO IMAGE + TITLE (like screenshot)
+            SizedBox(
+              height: 260,
+              width: double.infinity,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    'assets/images/graduation_hero.jpg',
+                    fit: BoxFit.cover,
                   ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        'SORT BY',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey.shade600,
-                          letterSpacing: 1.2,
-                        ),
+                  // slight dark overlay
+                  Container(color: Colors.black.withOpacity(0.25)),
+                  const Center(
+                    child: Text(
+                      'Graduation',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        letterSpacing: 0.4,
                       ),
-                      const SizedBox(width: 8),
-                      DropdownButton<String>(
-                        value: 'Featured',
-                        underline: const SizedBox(),
-                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'Featured',
-                            child: Text('Featured'),
-                          ),
-                        ],
-                        onChanged: (_) {},
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-                Text(
-                  '${products.length} products',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey.shade700,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          const Divider(height: 1),
+            const Divider(height: 1),
 
-          // PRODUCT GRID
-          Expanded(
-            child: Container(
-              color: Colors.grey.shade50,
-              child: GridView.builder(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 30.0),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // desktop‑like 3 columns
-                  mainAxisSpacing: 30,
-                  crossAxisSpacing: 30,
-                  childAspectRatio: 0.78,
-                ),
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return _ProductCard(product: product);
+            // FILTER / SORT BAR + PRODUCT COUNT
+            Container(
+              color: Colors.white,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Text(
+                          'FILTER BY',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey.shade600,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        DropdownButton<String>(
+                          value: 'All products',
+                          underline: const SizedBox(),
+                          icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'All products',
+                              child: Text('All products'),
+                            ),
+                          ],
+                          onChanged: (_) {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Text(
+                          'SORT BY',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey.shade600,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        DropdownButton<String>(
+                          value: 'Featured',
+                          underline: const SizedBox(),
+                          icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'Featured',
+                              child: Text('Featured'),
+                            ),
+                          ],
+                          onChanged: (_) {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    '${products.length} products',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Divider(height: 1),
+
+            // PRODUCT GRID
+            Container(
+              color: Colors.white,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  // 3 columns on wide screens, 2 on medium, 1 on narrow
+                  int crossAxisCount = 3;
+                  if (constraints.maxWidth < 900) crossAxisCount = 2;
+                  if (constraints.maxWidth < 600) crossAxisCount = 1;
+
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      mainAxisSpacing: 30,
+                      crossAxisSpacing: 30,
+                      childAspectRatio: 0.78,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return _ProductCard(product: product);
+                    },
+                  );
                 },
               ),
             ),
-          ),
-        ],
+
+            // same footer as home
+            const AppFooter(),
+          ],
+        ),
       ),
     );
   }
@@ -284,7 +284,7 @@ class _ProductCard extends StatelessWidget {
                   '£${product.price!.toStringAsFixed(2)}',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: product.compareAtPrice != null
-                        ? Colors.redAccent
+                        ? Colors.black
                         : Colors.black,
                     fontWeight: product.compareAtPrice != null
                         ? FontWeight.bold
