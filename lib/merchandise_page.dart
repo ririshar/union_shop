@@ -141,6 +141,7 @@ class _MerchandisePageState extends State<MerchandisePage> {
                 mainAxisSpacing: 40,
                 childAspectRatio: 3 / 4,
                 children: const [
+                  // Row 1
                   ProductCard(
                     title: 'ID Holders',
                     price: '£0.75',
@@ -155,6 +156,42 @@ class _MerchandisePageState extends State<MerchandisePage> {
                     title: 'Graduation bears',
                     price: 'Sold out',
                     imageUrl: 'assets/images/graduation_bear.png',
+                  ),
+
+                  // Row 2
+                  ProductCard(
+                    title: 'UoP Cotton Shopper',
+                    price: '£1.99',
+                    imageUrl: 'assets/images/cotton_shopper.png',
+                  ),
+                  ProductCard(
+                    title: 'Rainbow Lanyard',
+                    price: '£2.75',
+                    imageUrl: 'assets/images/rainbow_lanyard.png',
+                  ),
+                  ProductCard(
+                    title: 'Pen',
+                    price: '£1.00',
+                    imageUrl: 'assets/images/pen.png',
+                  ),
+
+                  // Row 3
+                  ProductCard(
+                    title: 'Lapel Pin',
+                    price: '£4.00',
+                    imageUrl: 'assets/images/lapel_pin.png',
+                  ),
+                  ProductCard(
+                    title: 'Crested Tie',
+                    originalPrice: '£15.00',
+                    price: '£10.99',
+                    imageUrl: 'assets/images/crested_tie.png',
+                  ),
+                  ProductCard(
+                    title: 'Crested Badge',
+                    originalPrice: '£7.00',
+                    price: '£4.99',
+                    imageUrl: 'assets/images/crested_badge.png',
                   ),
                 ],
               ),
