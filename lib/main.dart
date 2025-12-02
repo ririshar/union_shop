@@ -7,6 +7,7 @@ import 'package:union_shop/merchandise_page.dart'; // NEW
 import 'package:union_shop/halloween_page.dart'; // NEW
 import 'package:union_shop/signature_essential_page.dart'; // NEW
 import 'package:union_shop/portsmouth_city_page.dart'; // NEW
+import 'package:union_shop/pride_collection_page.dart'; // NEW
 
 void main() {
   runApp(const UnionShopApp());
@@ -32,7 +33,8 @@ class UnionShopApp extends StatelessWidget {
         '/shop/merchandise': (context) => const MerchandisePage(),
         '/shop/halloween': (context) => const HalloweenPage(),
         '/shop/signature': (context) => const SignatureEssentialPage(),
-        '/shop/portsmouth': (context) => const PortsmouthCityPage(), // NEW
+        '/shop/portsmouth': (context) => const PortsmouthCityPage(),
+        '/shop/pride': (context) => const PrideCollectionPage(), // NEW
       },
     );
   }
@@ -122,8 +124,11 @@ class TopHeader extends StatelessWidget {
                         case 'signature':
                           Navigator.of(context).pushNamed('/shop/signature');
                           break;
-                        case 'portsmouth': // NEW
+                        case 'portsmouth':
                           Navigator.of(context).pushNamed('/shop/portsmouth');
+                          break;
+                        case 'pride': // NEW
+                          Navigator.of(context).pushNamed('/shop/pride');
                           break;
                         default:
                           placeholderCallbackForButtons();
