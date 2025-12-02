@@ -4,6 +4,7 @@ import 'package:union_shop/product_page.dart';
 import 'package:union_shop/clothing_page.dart'; // add near other imports
 import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, match your filename
 import 'package:union_shop/merchandise_page.dart'; // NEW
+import 'package:union_shop/halloween_page.dart'; // NEW
 
 void main() {
   runApp(const UnionShopApp());
@@ -26,7 +27,8 @@ class UnionShopApp extends StatelessWidget {
         '/about': (context) => const AboutScreen(),
         '/shop/clothing': (context) => const ClothingPage(),
         '/shop/clothing/page-2': (context) => const ClothingPageTwo(),
-        '/shop/merchandise': (context) => const MerchandisePage(), // NEW
+        '/shop/merchandise': (context) => const MerchandisePage(),
+        '/shop/halloween': (context) => const HalloweenPage(), // NEW
       },
     );
   }
@@ -1260,69 +1262,30 @@ class NavSquare extends StatelessWidget {
   }
 }
 
-class ShopDropdown extends StatefulWidget {
-  final void Function(String key) onSelect;
-  final bool isActive;
-  const ShopDropdown(
-      {super.key, required this.onSelect, this.isActive = false});
-
-  @override
-  State<ShopDropdown> createState() => _ShopDropdownState();
-}
-
-class _ShopDropdownState extends State<ShopDropdown> {
-  bool _hovering = false;
-
-  void _setHover(bool v) {
-    if (_hovering == v) return;
-    setState(() {
-      _hovering = v;
-    });
-  }
+class ShopDropdown extends StatelessWidget {
+  const ShopDropdown({super.key, required Null Function(dynamic key) onSelect, required bool isActive});
 
   @override
   Widget build(BuildContext context) {
-    final bool underline = _hovering || widget.isActive;
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => _setHover(true),
-      onExit: (_) => _setHover(false),
-      child: PopupMenuButton<String>(
-        offset: const Offset(0, 6),
-        color: Colors.white,
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        onSelected: (key) => widget.onSelect(key),
-        itemBuilder: (ctx) => <PopupMenuEntry<String>>[
-          const PopupMenuItem(value: 'clothing', child: Text('Clothing')),
-          const PopupMenuItem(value: 'merchandise', child: Text('Merchandise')),
-          const PopupMenuItem(value: 'halloween', child: Text('Halloween 🎃')),
-          const PopupMenuItem(
-              value: 'signature', child: Text('Signature & Essential Range')),
-          const PopupMenuItem(
-              value: 'portsmouth', child: Text('Portsmouth City Collection')),
-          const PopupMenuItem(
-              value: 'pride', child: Text('Pride Collection 🏳️‍🌈')),
-          const PopupMenuItem(
-              value: 'graduation', child: Text('Graduation 🎓')),
-        ],
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          color: Colors.transparent,
-          child: Text(
-            'Shop',
-            style: TextStyle(
-              color: const Color(0xFF4d2963),
-              fontWeight: FontWeight.w400,
-              fontSize: 13,
-              decoration:
-                  underline ? TextDecoration.underline : TextDecoration.none,
-              decorationColor: const Color(0xFF4d2963),
-              decorationThickness: 1.6,
-            ),
-          ),
-        ),
-      ),
+    return PopupMenuButton<String>(
+      onSelected: (value) {
+        switch (value) {
+          case 'clothing':
+            Navigator.of(context).pushNamed('/shop/clothing');
+            break;
+          case 'merchandise':
+            Navigator.of(context).pushNamed('/shop/merchandise');
+            break;
+          case 'halloween': // NEW
+            Navigator.of(context).pushNamed('/shop/halloween');
+            break;
+        }
+      },
+      itemBuilder: (context) => const [
+        PopupMenuItem(value: 'clothing', child: Text('Clothing')),
+        PopupMenuItem(value: 'merchandise', child: Text('Merchandise')),
+        PopupMenuItem(value: 'halloween', child: Text('Halloween')), // NEW
+      ],
     );
   }
 }
