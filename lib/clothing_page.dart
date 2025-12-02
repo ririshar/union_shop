@@ -4,8 +4,8 @@ import 'package:union_shop/main.dart';
 class ClothingPage extends StatelessWidget {
   const ClothingPage({super.key});
 
-  void placeholderCallbackForButtons() {
-    // Placeholder for buttons that don't work yet
+  void _placeholderCallbackForButtons() {
+    // same placeholder as HomeScreen / AboutScreen
   }
 
   @override
@@ -14,55 +14,72 @@ class ClothingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // TopHeader with activeLabel 'Shop'
+            // Header (includes purple banner + logo + nav, same as homepage)
             TopHeader(
-              activeLabel: 'Shop',
-              placeholderCallbackForButtons: placeholderCallbackForButtons,
+              activeLabel: 'Shop', // underline “Shop”
+              placeholderCallbackForButtons: _placeholderCallbackForButtons,
             ),
 
-            // Banner
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              color: const Color(0xFF4d2963),
-              child: const Text(
-                'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Clothing page title
+            // 3) Clothing title (centered, like screenshot)
+            const SizedBox(height: 40),
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               child: const Center(
                 child: Text(
                   'Clothing',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    letterSpacing: 1,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                    letterSpacing: 0.5,
                   ),
                 ),
               ),
             ),
 
-            // Clothing products grid
+            const SizedBox(height: 24),
+
+            // Simple filter/sort row (text only, to mimic layout)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
+              child: Row(
+                children: [
+                  Text(
+                    'FILTER BY   All products',
+                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  ),
+                  Spacer(),
+                  Text(
+                    'SORT BY   Featured',
+                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  ),
+                  Spacer(),
+                  Text(
+                    '18 products',
+                    style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Product Grid
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
               child: GridView.count(
+                crossAxisCount: MediaQuery.of(context).size.width > 900
+                    ? 3
+                    : (MediaQuery.of(context).size.width > 600 ? 2 : 1),
+                crossAxisSpacing: 24,
+                mainAxisSpacing: 32,
+                childAspectRatio: 3 / 4,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
                 children: const [
                   ProductCard(
                     title: 'Purple Hoodie',
@@ -87,59 +104,6 @@ class ClothingPage extends StatelessWidget {
             const AppFooter(),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// Minimal TopHeader used by ClothingPage (keeps look/functionality consistent).
-class TopHeader extends StatelessWidget {
-  final String activeLabel;
-  final VoidCallback placeholderCallbackForButtons;
-  const TopHeader(
-      {super.key,
-      this.activeLabel = '',
-      required this.placeholderCallbackForButtons});
-
-  @override
-  Widget build(BuildContext context) {
-    Widget tab(String label, {VoidCallback? onTap}) {
-      final active = label == activeLabel;
-      return InkWell(
-        onTap: onTap ?? placeholderCallbackForButtons,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: const Color(0xFF4d2963),
-              fontSize: 13,
-              fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-              decoration:
-                  active ? TextDecoration.underline : TextDecoration.none,
-              decorationColor: const Color(0xFF4d2963),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      child: Row(
-        children: [
-          tab('Home',
-              onTap: () => Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/', (r) => false)),
-          // navigate to clothing page
-          tab('Shop',
-              onTap: () => Navigator.of(context).pushNamed('/shop/clothing')),
-          tab('The Print Shack', onTap: () => placeholderCallbackForButtons()),
-          tab('SALE!', onTap: () => placeholderCallbackForButtons()),
-          const Spacer(),
-          tab('About', onTap: () => Navigator.of(context).pushNamed('/about')),
-        ],
       ),
     );
   }
