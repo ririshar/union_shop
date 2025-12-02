@@ -83,18 +83,18 @@ class ClothingPage extends StatelessWidget {
                 children: const [
                   // Row 1
                   ProductCard(
-                    title: 'Purple Hoodie',
+                    title: 'Classic Hoodies',
                     price: '£25.00',
                     imageUrl: 'assets/images/purple_hoodie.png',
                   ),
                   ProductCard(
-                    title: 'Green Sweatshirt',
-                    price: '£20.00',
+                    title: 'Classic Sweatshirts',
+                    price: '£23.00',
                     imageUrl: 'assets/images/green_sweatshirt.png',
                   ),
                   ProductCard(
-                    title: 'Black T-Shirt',
-                    price: '£15.00',
+                    title: 'Classic T-Shirts',
+                    price: '£11.00',
                     imageUrl: 'assets/images/black_tshirt.png',
                   ),
 
