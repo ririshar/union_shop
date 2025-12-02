@@ -139,59 +139,42 @@ class _SignatureEssentialPageState extends State<SignatureEssentialPage> {
 
             const SizedBox(height: 24),
 
-            // Products grid – 3 on first row, 1 centered on second row
+            // Products grid – 4 products, all same size
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 180, vertical: 0),
-              child: Column(
-                children: [
-                  // Row 1 – 3 products
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 900 ? 3 : 1,
-                    crossAxisSpacing: 32,
-                    mainAxisSpacing: 40,
-                    childAspectRatio: 3 / 4,
-                    children: const [
-                      ProductCard(
-                        title: 'Signature T-Shirt',
-                        price: '£14.99',
-                        imageUrl: 'assets/images/sshirt.png',
-                      ),
-                      ProductCard(
-                        title: 'Signature Hoodie',
-                        price: '£32.99',
-                        imageUrl: 'assets/images/shoodie.png',
-                      ),
-                      ProductCard(
-                        title: 'Limited Edition Essential Zip Hoodies',
-                        originalPrice: '£20.00',
-                        price: '£14.99',
-                        imageUrl: 'assets/images/pink.png',
-                      ),
-                    ],
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: MediaQuery.of(context).size.width > 900 ? 3 : 1,
+                crossAxisSpacing: 32,
+                mainAxisSpacing: 40,
+                childAspectRatio: 3 / 4,
+                children: const [
+                  // Row 1
+                  ProductCard(
+                    title: 'Signature T-Shirt',
+                    price: '£14.99',
+                    imageUrl: 'assets/images/sshirt.png',
+                  ),
+                  ProductCard(
+                    title: 'Signature Hoodie',
+                    price: '£32.99',
+                    imageUrl: 'assets/images/shoodie.png',
+                  ),
+                  ProductCard(
+                    title: 'Limited Edition Essential Zip Hoodies',
+                    originalPrice: '£20.00',
+                    price: '£14.99',
+                    imageUrl: 'assets/images/pink.png',
                   ),
 
-                  const SizedBox(height: 40),
-
-                  // Row 2 – single Essential T-shirt centered
-                  Align(
-                    alignment: Alignment.center,
-                    child: ConstrainedBox(
-                      constraints:
-                          const BoxConstraints(maxWidth: 320, minWidth: 260),
-                      child: const AspectRatio(
-                        aspectRatio: 3 / 4,
-                        child: ProductCard(
-                          title: 'Essential T-Shirt',
-                          originalPrice: '£10.00',
-                          price: '£6.99',
-                          imageUrl: 'assets/images/pink_tshirt.png',
-                        ),
-                      ),
-                    ),
+                  // Row 2 – last product now same size & aligned to left
+                  ProductCard(
+                    title: 'Essential T-Shirt',
+                    originalPrice: '£10.00',
+                    price: '£6.99',
+                    imageUrl: 'assets/images/pink_tshirt.png',
                   ),
                 ],
               ),
