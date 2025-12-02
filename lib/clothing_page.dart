@@ -81,6 +81,7 @@ class ClothingPage extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: const [
+                  // Row 1
                   ProductCard(
                     title: 'Purple Hoodie',
                     price: '£25.00',
@@ -95,6 +96,40 @@ class ClothingPage extends StatelessWidget {
                     title: 'Black T-Shirt',
                     price: '£15.00',
                     imageUrl: 'assets/images/black_tshirt.png',
+                  ),
+
+                  // Row 2
+                  ProductCard(
+                    title: 'Grey Hoodie',
+                    price: '£25.00',
+                    imageUrl: 'assets/images/grey_hoodie.png',
+                  ),
+                  ProductCard(
+                    title: 'White T-Shirt',
+                    price: '£15.00',
+                    imageUrl: 'assets/images/white_tshirt.png',
+                  ),
+                  ProductCard(
+                    title: 'Navy Sweatshirt',
+                    price: '£20.00',
+                    imageUrl: 'assets/images/navy_sweatshirt.png',
+                  ),
+
+                  // Row 3
+                  ProductCard(
+                    title: 'Zip Hoodie',
+                    price: '£28.00',
+                    imageUrl: 'assets/images/zip_hoodie.png',
+                  ),
+                  ProductCard(
+                    title: 'Crew Neck Sweatshirt',
+                    price: '£22.00',
+                    imageUrl: 'assets/images/crew_sweatshirt.png',
+                  ),
+                  ProductCard(
+                    title: 'Logo T-Shirt',
+                    price: '£18.00',
+                    imageUrl: 'assets/images/logo_tshirt.png',
                   ),
                 ],
               ),
