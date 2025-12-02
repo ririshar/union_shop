@@ -6,6 +6,7 @@ import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, m
 import 'package:union_shop/merchandise_page.dart'; // NEW
 import 'package:union_shop/halloween_page.dart'; // NEW
 import 'package:union_shop/signature_essential_page.dart'; // NEW
+import 'package:union_shop/portsmouth_city_page.dart'; // NEW
 
 void main() {
   runApp(const UnionShopApp());
@@ -30,7 +31,8 @@ class UnionShopApp extends StatelessWidget {
         '/shop/clothing/page-2': (context) => const ClothingPageTwo(),
         '/shop/merchandise': (context) => const MerchandisePage(),
         '/shop/halloween': (context) => const HalloweenPage(),
-        '/shop/signature': (context) => const SignatureEssentialPage(), // NEW
+        '/shop/signature': (context) => const SignatureEssentialPage(),
+        '/shop/portsmouth': (context) => const PortsmouthCityPage(), // NEW
       },
     );
   }
