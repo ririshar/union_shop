@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/clothing_page.dart'; // add near other imports
 import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, match your filename
+import 'package:union_shop/merchandise_page.dart'; // NEW
 
 void main() {
   runApp(const UnionShopApp());
@@ -25,6 +26,7 @@ class UnionShopApp extends StatelessWidget {
         '/about': (context) => const AboutScreen(),
         '/shop/clothing': (context) => const ClothingPage(),
         '/shop/clothing/page-2': (context) => const ClothingPageTwo(),
+        '/shop/merchandise': (context) => const MerchandisePage(), // NEW
       },
     );
   }
@@ -106,6 +108,8 @@ class TopHeader extends StatelessWidget {
                           Navigator.of(context).pushNamed('/shop/clothing');
                           break;
                         case 'merchandise':
+                          Navigator.of(context).pushNamed('/shop/merchandise');
+                          break;
                         case 'halloween':
                         case 'signature':
                         case 'portsmouth':
