@@ -5,6 +5,7 @@ import 'package:union_shop/clothing_page.dart'; // add near other imports
 import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, match your filename
 import 'package:union_shop/merchandise_page.dart'; // NEW
 import 'package:union_shop/halloween_page.dart'; // NEW
+import 'package:union_shop/signature_essential_page.dart'; // NEW
 
 void main() {
   runApp(const UnionShopApp());
@@ -28,7 +29,8 @@ class UnionShopApp extends StatelessWidget {
         '/shop/clothing': (context) => const ClothingPage(),
         '/shop/clothing/page-2': (context) => const ClothingPageTwo(),
         '/shop/merchandise': (context) => const MerchandisePage(),
-        '/shop/halloween': (context) => const HalloweenPage(), // NEW
+        '/shop/halloween': (context) => const HalloweenPage(),
+        '/shop/signature': (context) => const SignatureEssentialPage(), // NEW
       },
     );
   }
@@ -114,6 +116,9 @@ class TopHeader extends StatelessWidget {
                           break;
                         case 'halloween':
                           Navigator.of(context).pushNamed('/shop/halloween');
+                          break;
+                        case 'signature':
+                          Navigator.of(context).pushNamed('/shop/signature');
                           break;
                         default:
                           placeholderCallbackForButtons();
