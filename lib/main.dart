@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/clothing_page.dart'; // add near other imports
-import 'package:union_shop/clothing_page2.dart'; // NEW
+import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, match your filename
 
 void main() {
   runApp(const UnionShopApp());
@@ -24,7 +24,7 @@ class UnionShopApp extends StatelessWidget {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutScreen(),
         '/shop/clothing': (context) => const ClothingPage(),
-        '/shop/clothing/page-2': (context) => const ClothingPage(), // NEW
+        '/shop/clothing/page-2': (context) => const ClothingPageTwo(),
       },
     );
   }

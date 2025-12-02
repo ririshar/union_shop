@@ -206,7 +206,7 @@ class _ClothingPageState extends State<ClothingPage> {
                 children: [
                   const IconButton(
                     icon: Icon(Icons.chevron_left, color: Colors.grey),
-                    onPressed: null, // first page: left arrow disabled
+                    onPressed: null, // first page: can't go back
                   ),
                   const SizedBox(width: 8),
                   const Text(
