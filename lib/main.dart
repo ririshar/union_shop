@@ -122,6 +122,9 @@ class TopHeader extends StatelessWidget {
                         case 'signature':
                           Navigator.of(context).pushNamed('/shop/signature');
                           break;
+                        case 'portsmouth': // NEW
+                          Navigator.of(context).pushNamed('/shop/portsmouth');
+                          break;
                         default:
                           placeholderCallbackForButtons();
                       }
@@ -435,7 +438,8 @@ class HomeScreen extends StatelessWidget {
                     Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: navigate to full collection page
+                          Navigator.of(context)
+                              .pushNamed('/shop/portsmouth'); // NEW
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF4d2963),
