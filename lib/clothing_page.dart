@@ -118,19 +118,23 @@ class ClothingPage extends StatelessWidget {
 
                   // Row 3
                   ProductCard(
-                    title: 'Zip Hoodie',
-                    price: '£28.00',
-                    imageUrl: 'assets/images/zip_hoodie.png',
+                    title: 'Classic Cap',
+                    price: '£12.00',
+                    imageUrl:
+                        'assets/images/zip_hoodie.png', // update if you have a cap image
                   ),
                   ProductCard(
-                    title: 'Crew Neck Sweatshirt',
-                    price: '£22.00',
-                    imageUrl: 'assets/images/crew_sweatshirt.png',
+                    title: 'Classic Beanie Hat',
+                    price: '£12.00',
+                    imageUrl:
+                        'assets/images/crew_sweatshirt.png', // update if you have a beanie image
                   ),
                   ProductCard(
-                    title: 'Logo T-Shirt',
-                    price: '£18.00',
-                    imageUrl: 'assets/images/logo_tshirt.png',
+                    title: 'Classic Rainbow Hoodies',
+                    price: '£12.99',
+                    originalPrice: '£30.00',
+                    imageUrl:
+                        'assets/images/logo_tshirt.png', // update if you have a rainbow hoodie image
                   ),
                 ],
               ),
