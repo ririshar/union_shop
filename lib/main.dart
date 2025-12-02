@@ -1301,6 +1301,12 @@ class _ShopDropdownState extends State<ShopDropdown> {
           PopupMenuItem(value: 'clothing', child: Text('Clothing')),
           PopupMenuItem(value: 'merchandise', child: Text('Merchandise')),
           PopupMenuItem(value: 'halloween', child: Text('Halloween')),
+          PopupMenuItem(
+              value: 'signature', child: Text('Signature and Essential range')),
+          PopupMenuItem(
+              value: 'portsmouth', child: Text('Portsmouth City Collection')),
+          PopupMenuItem(value: 'pride', child: Text('Pride Collection')),
+          PopupMenuItem(value: 'graduation', child: Text('Graduation')),
         ],
         child: Row(
           children: [
