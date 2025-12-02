@@ -113,12 +113,9 @@ class TopHeader extends StatelessWidget {
                           Navigator.of(context).pushNamed('/shop/merchandise');
                           break;
                         case 'halloween':
-                        case 'signature':
-                        case 'portsmouth':
-                        case 'pride':
-                        case 'graduation':
+                          Navigator.of(context).pushNamed('/shop/halloween');
+                          break;
                         default:
-                          // fallback to the placeholder passed into TopHeader
                           placeholderCallbackForButtons();
                       }
                     },
@@ -1262,30 +1259,68 @@ class NavSquare extends StatelessWidget {
   }
 }
 
-class ShopDropdown extends StatelessWidget {
-  const ShopDropdown({super.key, required Null Function(dynamic key) onSelect, required bool isActive});
+class ShopDropdown extends StatefulWidget {
+  final void Function(String key) onSelect;
+  final bool isActive;
+
+  const ShopDropdown({
+    super.key,
+    required this.onSelect,
+    this.isActive = false,
+  });
+
+  @override
+  State<ShopDropdown> createState() => _ShopDropdownState();
+}
+
+class _ShopDropdownState extends State<ShopDropdown> {
+  bool _hovering = false;
+
+  void _setHover(bool v) {
+    if (_hovering == v) return;
+    setState(() {
+      _hovering = v;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      onSelected: (value) {
-        switch (value) {
-          case 'clothing':
-            Navigator.of(context).pushNamed('/shop/clothing');
-            break;
-          case 'merchandise':
-            Navigator.of(context).pushNamed('/shop/merchandise');
-            break;
-          case 'halloween': // NEW
-            Navigator.of(context).pushNamed('/shop/halloween');
-            break;
-        }
-      },
-      itemBuilder: (context) => const [
-        PopupMenuItem(value: 'clothing', child: Text('Clothing')),
-        PopupMenuItem(value: 'merchandise', child: Text('Merchandise')),
-        PopupMenuItem(value: 'halloween', child: Text('Halloween')), // NEW
-      ],
+    final bool underline = _hovering || widget.isActive;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => _setHover(true),
+      onExit: (_) => _setHover(false),
+      child: PopupMenuButton<String>(
+        offset: const Offset(0, 6),
+        color: Colors.white,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        onSelected: widget.onSelect,
+        itemBuilder: (context) => const [
+          PopupMenuItem(value: 'clothing', child: Text('Clothing')),
+          PopupMenuItem(value: 'merchandise', child: Text('Merchandise')),
+          PopupMenuItem(value: 'halloween', child: Text('Halloween')),
+        ],
+        child: Row(
+          children: [
+            Text(
+              'Shop',
+              style: TextStyle(
+                color: const Color(0xFF4d2963),
+                fontWeight: FontWeight.w400,
+                fontSize: 13,
+                decoration:
+                    underline ? TextDecoration.underline : TextDecoration.none,
+                decorationColor: const Color(0xFF4d2963),
+                decorationThickness: 1.6,
+              ),
+            ),
+            const Icon(Icons.arrow_drop_down,
+                size: 18, color: Color(0xFF4d2963)),
+          ],
+        ),
+      ),
     );
   }
 }
