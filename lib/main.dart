@@ -35,7 +35,8 @@ class UnionShopApp extends StatelessWidget {
         '/shop/halloween': (context) => const HalloweenPage(),
         '/shop/signature': (context) => const SignatureEssentialPage(),
         '/shop/portsmouth': (context) => const PortsmouthCityPage(),
-        '/shop/pride': (context) => const PrideCollectionPage(), // NEW
+        '/shop/pride': (context) => const PrideCollectionPage(),
+        '/shop/graduation': (context) => const GraduationPage(), // <<< ADD THIS
       },
     );
   }
@@ -128,8 +129,11 @@ class TopHeader extends StatelessWidget {
                         case 'portsmouth':
                           Navigator.of(context).pushNamed('/shop/portsmouth');
                           break;
-                        case 'pride': // NEW
+                        case 'pride':
                           Navigator.of(context).pushNamed('/shop/pride');
+                          break;
+                        case 'graduation': // <<< HANDLE THIS
+                          Navigator.of(context).pushNamed('/shop/graduation');
                           break;
                         default:
                           placeholderCallbackForButtons();
