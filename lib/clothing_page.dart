@@ -100,18 +100,19 @@ class ClothingPage extends StatelessWidget {
 
                   // Row 2
                   ProductCard(
-                    title: 'Grey Hoodie',
-                    price: '£25.00',
+                    title: 'Classic Sweatshirts - Neutral',
+                    price: '£10.99',
+                    originalPrice: '£17.00',
                     imageUrl: 'assets/images/grey_hoodie.png',
                   ),
                   ProductCard(
-                    title: 'White T-Shirt',
-                    price: '£15.00',
+                    title: 'Graduation Hoodie',
+                    price: '£35.00',
                     imageUrl: 'assets/images/white_tshirt.png',
                   ),
                   ProductCard(
-                    title: 'Navy Sweatshirt',
-                    price: '£20.00',
+                    title: 'Graduation 3/4 Zipped Sweatshirt',
+                    price: '£45.00',
                     imageUrl: 'assets/images/navy_sweatshirt.png',
                   ),
 
