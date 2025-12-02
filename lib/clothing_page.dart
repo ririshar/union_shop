@@ -1,166 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/main.dart';
 
 class ClothingPage extends StatelessWidget {
   const ClothingPage({super.key});
 
+  void placeholderCallbackForButtons() {
+    // Placeholder for buttons that don't work yet
+  }
+
   @override
   Widget build(BuildContext context) {
-    void placeholderCallbackForButtons() {}
-
-    final products = [
-      {
-        'title': 'Classic Hoodies',
-        'price': '£25.00',
-        'image': 'assets/images/shoodie.png'
-      },
-      {
-        'title': 'Classic Sweatshirts',
-        'price': '£23.00',
-        'image': 'assets/images/sshirt.png'
-      },
-      {
-        'title': 'Classic T-Shirts',
-        'price': '£11.00',
-        'image': 'assets/images/pink_tshirt.png'
-      },
-      {
-        'title': 'Classic Sweatshirts - Neutral',
-        'price': '£10.99',
-        'original': '£17.00',
-        'image': 'assets/images/pink.png'
-      },
-      {
-        'title': 'Graduation Hoodies',
-        'price': '£35.00',
-        'image': 'assets/images/pinkhoodieessential.png'
-      },
-      {
-        'title': 'Graduation 3/4 Zipped',
-        'price': '£45.00',
-        'image': 'assets/images/yournamehoodie.png'
-      },
-      {
-        'title': 'Classic Cap',
-        'price': '£12.00',
-        'image': 'assets/images/postcard.png'
-      },
-      {
-        'title': 'Classic Beanie Hat',
-        'price': '£12.00',
-        'image': 'assets/images/notebook.png'
-      },
-      {
-        'title': 'Classic Rainbow Hoodies',
-        'price': '£12.99',
-        'original': '£30.00',
-        'image': 'assets/images/pizza.png'
-      },
-    ];
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // TopHeader with activeLabel 'Shop'
             TopHeader(
-                activeLabel: 'Shop',
-                placeholderCallbackForButtons: placeholderCallbackForButtons),
+              activeLabel: 'Shop',
+              placeholderCallbackForButtons: placeholderCallbackForButtons,
+            ),
 
-            const SizedBox(height: 24),
+            // Banner
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              color: const Color(0xFF4d2963),
+              child: const Text(
+                'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ),
 
-            // Page title
+            const SizedBox(height: 16),
+
+            // Clothing page title
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
               child: const Center(
                 child: Text(
                   'Clothing',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    letterSpacing: 1,
+                  ),
                 ),
               ),
             ),
 
-            // Filters / sort (simple placeholder)
+            // Clothing products grid
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: Row(
-                children: [
-                  const Text('FILTER BY',
-                      style: TextStyle(fontSize: 12, color: Colors.black54)),
-                  const SizedBox(width: 12),
-                  DropdownButton<String>(
-                    value: 'All products',
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'All products', child: Text('All products'))
-                    ],
-                    onChanged: (_) {},
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: const [
+                  ProductCard(
+                    title: 'Purple Hoodie',
+                    price: '£25.00',
+                    imageUrl: 'assets/images/purple_hoodie.png',
                   ),
-                  const Spacer(),
-                  const Text('SORT BY',
-                      style: TextStyle(fontSize: 12, color: Colors.black54)),
-                  const SizedBox(width: 12),
-                  DropdownButton<String>(
-                    value: 'Featured',
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'Featured', child: Text('Featured'))
-                    ],
-                    onChanged: (_) {},
+                  ProductCard(
+                    title: 'Green Sweatshirt',
+                    price: '£20.00',
+                    imageUrl: 'assets/images/green_sweatshirt.png',
+                  ),
+                  ProductCard(
+                    title: 'Black T-Shirt',
+                    price: '£15.00',
+                    imageUrl: 'assets/images/black_tshirt.png',
                   ),
                 ],
               ),
             ),
 
-            // Product grid 3x3 responsive
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final cross = constraints.maxWidth > 1100
-                      ? 3
-                      : (constraints.maxWidth > 700 ? 3 : 1);
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: cross,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 24,
-                    childAspectRatio: 1.6,
-                    children: products.map((p) {
-                      return ProductCard(
-                        title: p['title'] ?? '',
-                        price: p['price'] ?? '',
-                        originalPrice: p['original'],
-                        imageUrl: p['image'] ?? '',
-                      );
-                    }).toList(),
-                  );
-                },
-              ),
-            ),
-
-            // pagination placeholder
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  OutlinedButton(
-                      onPressed: null, child: Icon(Icons.arrow_back)),
-                  SizedBox(width: 12),
-                  Text('Page 1 of 2'),
-                  SizedBox(width: 12),
-                  OutlinedButton(
-                      onPressed: null, child: Icon(Icons.arrow_forward)),
-                ],
-              ),
-            ),
+            // Footer
+            const AppFooter(),
           ],
         ),
       ),
