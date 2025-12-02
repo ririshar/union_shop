@@ -209,7 +209,8 @@ class TopHeader extends StatelessWidget {
               onTap: () => Navigator.of(context)
                   .pushNamedAndRemoveUntil('/', (r) => false)),
           // navigate to clothing page
-          tab('Shop', onTap: () => Navigator.of(context).pushNamed('/shop/clothing')),
+          tab('Shop',
+              onTap: () => Navigator.of(context).pushNamed('/shop/clothing')),
           tab('The Print Shack', onTap: () => placeholderCallbackForButtons()),
           tab('SALE!', onTap: () => placeholderCallbackForButtons()),
           const Spacer(),

@@ -99,19 +99,18 @@ class TopHeader extends StatelessWidget {
                   // Shop dropdown (replaces simple Shop HomeTab)
                   ShopDropdown(
                     onSelect: (key) {
-                      // handle navigation keys here — update to real routes if available
                       switch (key) {
                         case 'clothing':
+                          Navigator.of(context).pushNamed('/shop/clothing');
+                          break;
                         case 'merchandise':
                         case 'halloween':
                         case 'signature':
                         case 'portsmouth':
                         case 'pride':
                         case 'graduation':
-                          // placeholder callback if you don't have routes yet
-                          placeholderCallbackForButtons();
-                          break;
                         default:
+                          // fallback to the placeholder passed into TopHeader
                           placeholderCallbackForButtons();
                       }
                     },
