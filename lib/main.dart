@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:union_shop/graduation_page.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/clothing_page.dart'; // add near other imports
 import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, match your filename
@@ -507,8 +508,13 @@ class HomeScreen extends StatelessWidget {
                               NavSquare(
                                 imageUrl: 'assets/images/square1.jpg',
                                 label: 'Apparel',
-                                onTap: () =>
-                                    Navigator.of(context).pushNamed('/shop'),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const GraduationPage()),
+                                  );
+                                },
                               ),
                               NavSquare(
                                 imageUrl: 'assets/images/square2.jpg',
