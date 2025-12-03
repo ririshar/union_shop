@@ -193,7 +193,10 @@ class TopHeader extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           constraints:
                               const BoxConstraints(minWidth: 32, minHeight: 32),
-                          onPressed: placeholderCallbackForButtons,
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed('/search'); // <-- OPEN SEARCH PAGE
+                          },
                         ),
                         IconButton(
                           icon: const Icon(Icons.person_outline,
