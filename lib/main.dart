@@ -148,14 +148,9 @@ class TopHeader extends StatelessWidget {
                     onSelect: (key) {
                       switch (key) {
                         case 'about':
-                          Navigator.of(context)
-                              .pushNamed('/printshack/about'); // CHANGED
+                          Navigator.of(context).pushNamed('/printshack/about');
                           break;
-                        case 'personalisation':
-                          Navigator.of(context).pushNamed('/printshack');
-                          break;
-                        default:
-                          placeholderCallbackForButtons();
+                        // other cases...
                       }
                     },
                     isActive: activeLabel == 'The Print Shack',
