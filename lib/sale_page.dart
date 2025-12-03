@@ -28,8 +28,8 @@ class SalePage extends StatelessWidget {
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 1100),
-                  child: Column(
-                    children: const [
+                  child: const Column(
+                    children: [
                       SizedBox(height: 8),
                       Text(
                         'SALE',
@@ -187,13 +187,13 @@ class SaleProduct {
 final List<SaleProduct> _saleProducts = [
   SaleProduct(
     name: 'A5 Notepad',
-    imagePath: 'assets/images/sale_notepad.jpg',
+    imagePath: 'assets/images/sale_a5_notepad.jpg',
     price: '£1.80',
     soldOut: true,
   ),
   SaleProduct(
     name: 'Classic Sweatshirts – Neutral',
-    imagePath: 'assets/images/sale_sweatshirt.jpg',
+    imagePath: 'assets/images/sale_classic_sweatshirt_neutral.jpg',
     originalPrice: '£17.00',
     price: '£10.99',
   ),
@@ -202,7 +202,47 @@ final List<SaleProduct> _saleProducts = [
     imagePath: 'assets/images/sale_recycled_notebook.jpg',
     price: '£1.80',
   ),
-  // add more to reach 14 products if you like
+
+  // Row 2
+  SaleProduct(
+    name: 'iPhone 5/6 Charge & Sync Cable',
+    imagePath: 'assets/images/sale_iphone56_cable.jpg',
+    originalPrice: '£3.00',
+    price: '£1.50',
+  ),
+  SaleProduct(
+    name: 'Type C Charge & Sync Cable',
+    imagePath: 'assets/images/sale_typec_cable.jpg',
+    originalPrice: '£3.00',
+    price: '£1.50',
+  ),
+  SaleProduct(
+    name: 'USB to USB Charge & Sync Cables',
+    imagePath: 'assets/images/sale_usb_usb_cable.jpg',
+    originalPrice: '£3.00',
+    price: '£1.50',
+  ),
+
+  // Row 3
+  SaleProduct(
+    name: 'Dimple Pop Fidget Keyring',
+    imagePath: 'assets/images/sale_dimple_pop_keyring.jpg',
+    originalPrice: '£1.50',
+    price: '£0.99',
+  ),
+  SaleProduct(
+    name: 'Nike Academy 18 Tech Pants (W)',
+    imagePath: 'assets/images/sale_nike_pants_w.jpg',
+    originalPrice: '£24.99',
+    price: '£7.00',
+  ),
+  SaleProduct(
+    name: 'Nike Academy 18 Tech Pants (M)',
+    imagePath: 'assets/images/sale_nike_pants_m.jpg',
+    originalPrice: '£24.99',
+    price: '£7.00',
+    soldOut: true,
+  ),
 ];
 
 class _SaleProductCard extends StatelessWidget {

@@ -12,6 +12,7 @@ import 'package:union_shop/portsmouth_city_page.dart'; // NEW
 import 'package:union_shop/pride_collection_page.dart'; // NEW
 import 'package:union_shop/print_shack_about_page.dart';
 import 'package:union_shop/sale_page.dart';
+import 'package:union_shop/search_page.dart'; // <--- ADD
 
 void main() {
   runApp(const UnionShopApp());
@@ -44,6 +45,7 @@ class UnionShopApp extends StatelessWidget {
         '/printshack/personalisation': (context) =>
             const PrintShackPersonalisationPage(),
         '/sale': (context) => const SalePage(),
+        '/search': (context) => const SearchPage(), // <--- ADD
       },
     );
   }
