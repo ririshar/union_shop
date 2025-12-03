@@ -11,6 +11,7 @@ import 'package:union_shop/signature_essential_page.dart'; // NEW
 import 'package:union_shop/portsmouth_city_page.dart'; // NEW
 import 'package:union_shop/pride_collection_page.dart'; // NEW
 import 'package:union_shop/print_shack_about_page.dart';
+import 'package:union_shop/sale_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -42,6 +43,7 @@ class UnionShopApp extends StatelessWidget {
         '/printshack/about': (context) => const PrintShackAboutPage(),
         '/printshack/personalisation': (context) =>
             const PrintShackPersonalisationPage(),
+        '/sale': (context) => const SalePage(),
       },
     );
   }
@@ -166,7 +168,7 @@ class TopHeader extends StatelessWidget {
                   const SizedBox(width: 8),
                   HomeTab(
                     label: 'SALE!',
-                    onTap: placeholderCallbackForButtons,
+                    onTap: () => Navigator.of(context).pushNamed('/sale'),
                     isActive: activeLabel == 'SALE!',
                   ),
                   const SizedBox(width: 8),
@@ -600,8 +602,10 @@ class HomeScreen extends StatelessWidget {
                                       const SizedBox(height: 24),
                                       ElevatedButton(
                                         onPressed: () {
-                                          Navigator.of(context).pushNamed(
-                                              '/printshack/personalisation');
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/printshack/personalisation',
+                                          );
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
@@ -613,8 +617,9 @@ class HomeScreen extends StatelessWidget {
                                         child: const Text(
                                           'CLICK HERE TO ADD TEXT!',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: 1),
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1,
+                                          ),
                                         ),
                                       ),
                                     ],
