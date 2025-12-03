@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:union_shop/graduation_page.dart';
+import 'package:union_shop/print_shack_personalisation_page.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/clothing_page.dart'; // add near other imports
 import 'package:union_shop/clothing_page2.dart'; // or clothing_page_two.dart, match your filename
@@ -39,6 +40,8 @@ class UnionShopApp extends StatelessWidget {
         '/shop/pride': (context) => const PrideCollectionPage(),
         '/shop/graduation': (context) => const GraduationPage(),
         '/printshack/about': (context) => const PrintShackAboutPage(),
+        '/printshack/personalisation': (context) =>
+            const PrintShackPersonalisationPage(),
       },
     );
   }
@@ -150,7 +153,12 @@ class TopHeader extends StatelessWidget {
                         case 'about':
                           Navigator.of(context).pushNamed('/printshack/about');
                           break;
-                        // other cases...
+                        case 'personalisation':
+                          Navigator.of(context)
+                              .pushNamed('/printshack/personalisation');
+                          break;
+                        default:
+                          placeholderCallbackForButtons();
                       }
                     },
                     isActive: activeLabel == 'The Print Shack',
