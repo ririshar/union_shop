@@ -9,6 +9,7 @@ import 'package:union_shop/halloween_page.dart'; // NEW
 import 'package:union_shop/signature_essential_page.dart'; // NEW
 import 'package:union_shop/portsmouth_city_page.dart'; // NEW
 import 'package:union_shop/pride_collection_page.dart'; // NEW
+import 'package:union_shop/print_shack_about_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -36,7 +37,8 @@ class UnionShopApp extends StatelessWidget {
         '/shop/signature': (context) => const SignatureEssentialPage(),
         '/shop/portsmouth': (context) => const PortsmouthCityPage(),
         '/shop/pride': (context) => const PrideCollectionPage(),
-        '/shop/graduation': (context) => const GraduationPage(), // <<< ADD THIS
+        '/shop/graduation': (context) => const GraduationPage(),
+        '/printshack/about': (context) => const PrintShackAboutPage(),
       },
     );
   }
@@ -146,7 +148,8 @@ class TopHeader extends StatelessWidget {
                     onSelect: (key) {
                       switch (key) {
                         case 'about':
-                          Navigator.of(context).pushNamed('/about');
+                          Navigator.of(context)
+                              .pushNamed('/printshack/about'); // CHANGED
                           break;
                         case 'personalisation':
                           Navigator.of(context).pushNamed('/printshack');
