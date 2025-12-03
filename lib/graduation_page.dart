@@ -32,6 +32,7 @@ class GraduationPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   // slight dark overlay
+                  // ignore: deprecated_member_use
                   Container(color: Colors.black.withOpacity(0.25)),
                   const Center(
                     child: Text(

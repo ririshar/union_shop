@@ -17,7 +17,7 @@ class PrintShackAboutPage extends StatelessWidget {
               placeholderCallbackForButtons: _placeholder,
             ),
 
-            // Page content
+            // WHITE CONTENT AREA
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
@@ -28,6 +28,8 @@ class PrintShackAboutPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(height: 16),
+
+                      // PAGE TITLE
                       const Text(
                         'The Union Print Shack',
                         style: TextStyle(
@@ -37,9 +39,10 @@ class PrintShackAboutPage extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
+
                       const SizedBox(height: 32),
 
-                      // 3 images in a row
+                      // 3 IMAGES IN A ROW
                       LayoutBuilder(
                         builder: (context, constraints) {
                           final isNarrow = constraints.maxWidth < 800;
@@ -62,7 +65,7 @@ class PrintShackAboutPage extends StatelessWidget {
 
                       const SizedBox(height: 32),
 
-                      // Text blocks
+                      // TEXT CONTENT – MATCHING THE SITE COPY
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Column(
@@ -72,47 +75,39 @@ class PrintShackAboutPage extends StatelessWidget {
                               'Make It Yours at The Union Print Shack',
                             ),
                             _BodyText(
-                              'Want to add a personal touch? We’ve got you covered with '
-                              'heat-pressed customisation on all our clothing. Swing by '
-                              'the shop – our team’s always happy to help you pick the '
-                              'right gear and answer any questions.',
+                              'Want to add a personal touch? We’ve got you covered with heat-pressed '
+                              'customisation on all our clothing. Swing by the shop – our team’s always '
+                              'happy to help you pick the right gear and answer any questions.',
                             ),
                             SizedBox(height: 18),
                             _HeadingText(
                               'Uni Gear or Your Gear – We’ll Personalise It',
                             ),
                             _BodyText(
-                              'Whether you’re repping your university or putting your '
-                              'own spin on a hoodie you already own, we’ve got you '
-                              'covered. We can personalise official uni‑branded clothing '
-                              'and your own items – just bring them in and let’s get '
-                              'creative!',
+                              'Whether you’re repping your university or putting your own spin on a hoodie '
+                              'you already own, we’ve got you covered. We can personalise official uni-'
+                              'branded clothing and your own items – just bring them in and let’s get creative!',
                             ),
                             SizedBox(height: 18),
                             _HeadingText('Simple Pricing, No Surprises'),
                             _BodyText(
-                              'Customising your gear won’t break the bank – just £3 for '
-                              'one line of text or a small chest logo, and £5 for two '
-                              'lines or a large back logo. Turnaround time is up to '
-                              'three working days, and we’ll let you know as soon as '
-                              'it’s ready to collect.',
+                              'Customising your gear won’t break the bank – just £3 for one line of text or '
+                              'a small chest logo, and £5 for two lines or a large back logo. Turnaround time '
+                              'is up to three working days, and we’ll let you know as soon as it’s ready to collect.',
                             ),
                             SizedBox(height: 18),
                             _HeadingText('Personalisation Terms & Conditions'),
                             _BodyText(
-                              'We will print your clothing exactly as you have provided '
-                              'it to us, whether online or in person. We are not '
-                              'responsible for any spelling errors. Please ensure your '
-                              'chosen text is clearly displayed in either capitals or '
-                              'lowercase. Refunds are not provided for any personalised '
-                              'items.',
+                              'We will print your clothing exactly as you have provided it to us, whether online '
+                              'or in person. We are not responsible for any spelling errors. Please ensure your '
+                              'chosen text is clearly displayed in either capitals or lowercase. Refunds are not '
+                              'provided for any personalised items.',
                             ),
                             SizedBox(height: 18),
                             _HeadingText('Ready to Make It Yours?'),
                             _BodyText(
-                              'Pop in or get in touch today – let’s create something '
-                              'uniquely you with our personalisation service at The '
-                              'Union Print Shack!',
+                              'Pop in or get in touch today – let’s create something uniquely you with our '
+                              'personalisation service at The Union Print Shack!',
                             ),
                           ],
                         ),
