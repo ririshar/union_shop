@@ -278,7 +278,13 @@ class HomeScreen extends StatelessWidget {
                 },
               ],
               onButtonTap: (item) {
-                // placeholder — navigation or action per slide
+                final title = item['title'] ?? '';
+                if (title == 'The Print Shack') {
+                  Navigator.of(context)
+                      .pushNamed('/printshack/personalisation');
+                } else {
+                  // other slides can stay as placeholders for now
+                }
               },
             ),
 
@@ -594,7 +600,8 @@ class HomeScreen extends StatelessWidget {
                                       const SizedBox(height: 24),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // TODO: navigate to personalisation page
+                                          Navigator.of(context).pushNamed(
+                                              '/printshack/personalisation');
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
