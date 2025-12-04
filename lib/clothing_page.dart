@@ -167,7 +167,7 @@ class _ClothingPageState extends State<ClothingPage> {
                   ProductCard(
                     title: 'Graduation Hoodie',
                     price: '£35.00',
-                    imageUrl: 'assets/images/white_tshirt.png',
+                    imageUrl: 'assets/images/graduationhoodie.png',
                   ),
                   ProductCard(
                     title: 'Graduation 3/4 Zipped Sweatshirt',
