@@ -357,8 +357,8 @@ class _ProductPageState extends State<ProductPage> {
                             const SizedBox(height: 24),
 
                             // Social icons row (simple text placeholders)
-                            Row(
-                              children: const [
+                            const Row(
+                              children: [
                                 Icon(Icons.share, size: 16),
                                 SizedBox(width: 4),
                                 Text('Share'),

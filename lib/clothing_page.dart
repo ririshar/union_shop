@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/main.dart';
+import 'package:union_shop/product_page.dart';
 
 class ClothingPage extends StatefulWidget {
   const ClothingPage({super.key});
@@ -269,49 +270,105 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget imageWidget(String path) {
       if (path.startsWith('http')) {
-        return Image.network(path,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(color: Colors.grey[300]));
+        return Image.network(
+          path,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Container(color: Colors.grey[300]),
+        );
       } else {
-        return Image.asset(path,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(color: Colors.grey[300]));
+        return Image.asset(
+          path,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Container(color: Colors.grey[300]),
+        );
       }
     }
 
+    // Simple per‑product description; you can expand this later.
+    String description;
+    if (title.contains('Hoodie')) {
+      description =
+          'Our best selling Classic Hoodie comes in great colours!\n\n'
+          'Double fabric hood with flat cords, twin needle stitching detail, '
+          'kangaroo pouch pocket and ribbed cuff and hem.\n\n'
+          'What’s not to love about these University campus hoodies?';
+    } else if (title.contains('Sweatshirt')) {
+      description = 'Super comfy classic sweatshirt, perfect for layering.\n\n'
+          'Brushed fleece inside, ribbed cuffs and hem, and a relaxed unisex fit.';
+    } else if (title.contains('T-Shirt')) {
+      description = 'Soft cotton classic T‑shirt with a regular unisex fit.\n\n'
+          'Perfect for everyday wear on campus or around the city.';
+    } else if (title.contains('Cap') || title.contains('Beanie')) {
+      description = 'Finish your look with our classic headwear.\n\n'
+          'Ideal for campus, game days and everything in between.';
+    } else {
+      description = 'Part of our Union Shop clothing collection.\n\n'
+          'Designed for everyday comfort with a relaxed unisex fit.';
+    }
+
+    const extraInfo =
+        'Want to add your name or course on the back? Some products are available for personalisation too.';
+
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed('/product'),
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          '/product',
+          arguments: ProductDetailArgs(
+            title: title,
+            price: price,
+            originalPrice: originalPrice,
+            imageUrl: imageUrl,
+            colours: const ['Purple', 'Grey', 'Black'],
+            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+            description: description,
+            extraInfo: extraInfo,
+          ),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: imageWidget(imageUrl)),
+              borderRadius: BorderRadius.circular(6),
+              child: imageWidget(imageUrl),
+            ),
           ),
           const SizedBox(height: 8),
-          Text(title,
-              style:
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 4),
           if (originalPrice != null)
             Row(
               children: [
-                Text(originalPrice!,
-                    style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough)),
+                Text(
+                  originalPrice!,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                    decoration: TextDecoration.lineThrough,
+                  ),
+                ),
                 const SizedBox(width: 8),
-                Text(price,
-                    style: const TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.w700)),
+                Text(
+                  price,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ],
             )
           else
-            Text(price,
-                style:
-                    const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+            Text(
+              price,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
         ],
       ),
     );
