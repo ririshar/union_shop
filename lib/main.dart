@@ -641,8 +641,8 @@ class HomeScreen extends StatelessWidget {
                                         const BoxConstraints(maxWidth: 360),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(6),
-                                      child: Image.network(
-                                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                                      child: Image.asset(
+                                        'assets/images/printshack.png', // <-- use printshack.png here
                                         fit: BoxFit.cover,
                                         errorBuilder:
                                             (context, error, stackTrace) {
