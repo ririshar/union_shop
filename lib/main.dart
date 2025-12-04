@@ -51,6 +51,30 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
+void openProductPage(
+  BuildContext context, {
+  required String title,
+  required String price,
+  String? originalPrice,
+  required String imageUrl,
+  String description = '',
+  String extraInfo = '',
+}) {
+  Navigator.of(context).pushNamed(
+    '/product',
+    arguments: ProductDetailArgs(
+      title: title,
+      price: price,
+      originalPrice: originalPrice,
+      imageUrl: imageUrl,
+      colours: const ['Purple', 'Grey', 'Black'],
+      sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+      description: description,
+      extraInfo: extraInfo,
+    ),
+  );
+}
+
 // TopHeader: shared header used by HomeScreen and AboutScreen so tabs stay in the same place
 class TopHeader extends StatelessWidget {
   final String activeLabel;
@@ -813,23 +837,17 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(
-          '/product',
-          arguments: ProductDetailArgs(
-            title: title,
-            price: price,
-            originalPrice: originalPrice,
-            imageUrl: imageUrl,
-            // For now, basic defaults – clothing pages can later pass
-            // specific colours / sizes / descriptions.
-            colours: const ['Purple', 'Grey', 'Black'],
-            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
-            description:
-                'Our best selling Classic Hoodie comes in a range of colours.\n\n'
-                'Double fabric hood, kangaroo pouch pocket and ribbed cuff and hem.',
-            extraInfo:
-                'Want to add your name or course on the back? This product is available for personalisation too.',
-          ),
+        openProductPage(
+          context,
+          title: title,
+          price: price,
+          originalPrice: originalPrice,
+          imageUrl: imageUrl,
+          description:
+              'Our best selling Classic Hoodie comes in a range of colours.\n\n'
+              'Double fabric hood, kangaroo pouch pocket and ribbed cuff and hem.',
+          extraInfo:
+              'Want to add your name or course on the back? This product is available for personalisation too.',
         );
       },
       child: Column(
