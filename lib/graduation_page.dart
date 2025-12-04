@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // for TopHeader and AppFooter
+import 'main.dart'; // for TopHeader, AppFooter, openProductPage
 
 class GraduationPage extends StatelessWidget {
   const GraduationPage({super.key});
@@ -20,7 +20,7 @@ class GraduationPage extends StatelessWidget {
               placeholderCallbackForButtons: _placeholder,
             ),
 
-            // HERO IMAGE + TITLE (like screenshot)
+            // HERO IMAGE + TITLE
             SizedBox(
               height: 260,
               width: double.infinity,
@@ -31,7 +31,6 @@ class GraduationPage extends StatelessWidget {
                     'assets/images/graduation_hero.jpg',
                     fit: BoxFit.cover,
                   ),
-                  // slight dark overlay
                   // ignore: deprecated_member_use
                   Container(color: Colors.black.withOpacity(0.25)),
                   const Center(
@@ -132,47 +131,53 @@ class GraduationPage extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  // 3 columns on wide screens, 2 on medium, 1 on narrow
                   int crossAxisCount = 3;
                   if (constraints.maxWidth < 900) crossAxisCount = 2;
                   if (constraints.maxWidth < 600) crossAxisCount = 1;
 
-                  return GridView.count(
+                  return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: crossAxisCount,
-                    mainAxisSpacing: 30,
-                    crossAxisSpacing: 30,
-                    childAspectRatio: 0.78,
-                    children: [
-                      GestureDetector(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      mainAxisSpacing: 30,
+                      crossAxisSpacing: 30,
+                      childAspectRatio: 0.78,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final p = products[index];
+
+                      return GestureDetector(
                         onTap: () {
+                          final description =
+                              '${p.name} from our graduation collection.\n\n'
+                              'Perfect for celebrating your big day or as a keepsake afterwards.';
+                          const extraInfo =
+                              'Graduation products are available for a limited time around ceremonies.';
+
                           openProductPage(
                             context,
-                            title: 'Graduation Hoodie',
-                            price: '£35.00',
-                            imageUrl: 'assets/images/graduationhoodie.jpg',
-                            description:
-                                'Celebrate your achievement with our official Graduation Hoodie.\n\n'
-                                'Soft fleece lining, front pouch pocket and classic university branding.',
-                            extraInfo:
-                                'Perfect keepsake to remember your graduation day. Limited stock each year.',
+                            title: p.name,
+                            price: p.price != null
+                                ? '£${p.price!.toStringAsFixed(2)}'
+                                : '£0.00',
+                            originalPrice: p.compareAtPrice != null
+                                ? '£${p.compareAtPrice!.toStringAsFixed(2)}'
+                                : null,
+                            imageUrl: p.imagePath,
+                            description: description,
+                            extraInfo: extraInfo,
                           );
                         },
-                        child: const ProductCard(
-                          title: 'Graduation Hoodie',
-                          price: '£35.00',
-                          imageUrl: 'assets/images/graduationhoodie.jpg',
-                        ),
-                      ),
-                      // add similar blocks for other graduation items
-                    ],
+                        child: _GraduationProductCard(product: p),
+                      );
+                    },
                   );
                 },
               ),
             ),
 
-            // same footer as home
             const AppFooter(),
           ],
         ),
@@ -247,3 +252,101 @@ final List<GraduationProduct> _graduationProducts = [
   ),
 ];
 
+class _GraduationProductCard extends StatelessWidget {
+  final GraduationProduct product;
+
+  const _GraduationProductCard({required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    final hasPrice = product.price != null;
+    final hasCompare = product.compareAtPrice != null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.asset(
+                    product.imagePath,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) =>
+                        Container(color: Colors.grey[300]),
+                  ),
+                ),
+              ),
+              if (product.soldOut)
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    // ignore: deprecated_member_use
+                    color: Colors.black.withOpacity(0.75),
+                    child: const Text(
+                      'SOLD OUT',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          product.name,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 4),
+        if (product.soldOut)
+          const Text(
+            'Sold out',
+            style: TextStyle(fontSize: 13, color: Colors.grey),
+          )
+        else if (hasPrice && hasCompare)
+          Row(
+            children: [
+              Text(
+                '£${product.compareAtPrice!.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                  decoration: TextDecoration.lineThrough,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text(
+                '£${product.price!.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          )
+        else if (hasPrice)
+          Text(
+            '£${product.price!.toStringAsFixed(2)}',
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        else
+          const SizedBox.shrink(),
+      ],
+    );
+  }
+}
