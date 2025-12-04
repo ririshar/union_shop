@@ -12,7 +12,9 @@ import 'package:union_shop/portsmouth_city_page.dart'; // NEW
 import 'package:union_shop/pride_collection_page.dart'; // NEW
 import 'package:union_shop/print_shack_about_page.dart';
 import 'package:union_shop/sale_page.dart';
-import 'package:union_shop/search_page.dart'; // <--- ADD
+import 'package:union_shop/search_page.dart';
+ import 'package:union_shop/productpage0.dart';
+
 
 void main() {
   runApp(const UnionShopApp());
@@ -61,7 +63,7 @@ class TopHeader extends StatelessWidget {
     required this.activeLabel,
     required this.placeholderCallbackForButtons,
   });
-  
+
   get assets => null;
 
   @override
@@ -813,7 +815,24 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/product');
+        Navigator.of(context).pushNamed(
+          '/product',
+          arguments: ProductDetailArgs(
+            title: title,
+            price: price,
+            originalPrice: originalPrice,
+            imageUrl: imageUrl,
+            // For now, basic defaults – clothing pages can later pass
+            // specific colours / sizes / descriptions.
+            colours: const ['Purple', 'Grey', 'Black'],
+            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+            description:
+                'Our best selling Classic Hoodie comes in a range of colours.\n\n'
+                'Double fabric hood, kangaroo pouch pocket and ribbed cuff and hem.',
+            extraInfo:
+                'Want to add your name or course on the back? This product is available for personalisation too.',
+          ),
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
