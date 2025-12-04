@@ -144,17 +144,17 @@ class _ClothingPageState extends State<ClothingPage> {
                   ProductCard(
                     title: 'Classic Hoodies',
                     price: '£25.00',
-                    imageUrl: 'assets/images/purple_hoodie.png',
+                    imageUrl: 'assets/images/classichoodie.png',
                   ),
                   ProductCard(
                     title: 'Classic Sweatshirts',
                     price: '£23.00',
-                    imageUrl: 'assets/images/green_sweatshirt.png',
+                    imageUrl: 'assets/images/classicsweatshirt.png',
                   ),
                   ProductCard(
                     title: 'Classic T-Shirts',
                     price: '£11.00',
-                    imageUrl: 'assets/images/black_tshirt.png',
+                    imageUrl: 'assets/images/classictshirt.png',
                   ),
 
                   // Row 2

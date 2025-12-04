@@ -61,6 +61,8 @@ class TopHeader extends StatelessWidget {
     required this.activeLabel,
     required this.placeholderCallbackForButtons,
   });
+  
+  get assets => null;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +182,6 @@ class TopHeader extends StatelessWidget {
                     isActive: activeLabel == 'About',
                   ),
                   const Spacer(),
-
                   // right side icons
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
