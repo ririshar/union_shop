@@ -152,7 +152,26 @@ class SalePage extends StatelessWidget {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       final p = products[index];
-                      return _SaleProductCard(product: p);
+
+                      return GestureDetector(
+                        onTap: () {
+                          final description =
+                              '${p.name} is now on sale.\n\nGrab it while stocks last at a reduced price.';
+                          const extraInfo =
+                              'Sale items are subject to limited availability and may not be restocked.';
+
+                          openProductPage(
+                            context,
+                            title: p.name,
+                            price: p.price,
+                            originalPrice: p.originalPrice,
+                            imageUrl: p.imagePath,
+                            description: description,
+                            extraInfo: extraInfo,
+                          );
+                        },
+                        child: _SaleProductCard(product: p),
+                      );
                     },
                   );
                 },

@@ -137,20 +137,36 @@ class GraduationPage extends StatelessWidget {
                   if (constraints.maxWidth < 900) crossAxisCount = 2;
                   if (constraints.maxWidth < 600) crossAxisCount = 1;
 
-                  return GridView.builder(
+                  return GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      mainAxisSpacing: 30,
-                      crossAxisSpacing: 30,
-                      childAspectRatio: 0.78,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return _ProductCard(product: product);
-                    },
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: 30,
+                    crossAxisSpacing: 30,
+                    childAspectRatio: 0.78,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          openProductPage(
+                            context,
+                            title: 'Graduation Hoodie',
+                            price: '£35.00',
+                            imageUrl: 'assets/images/graduationhoodie.jpg',
+                            description:
+                                'Celebrate your achievement with our official Graduation Hoodie.\n\n'
+                                'Soft fleece lining, front pouch pocket and classic university branding.',
+                            extraInfo:
+                                'Perfect keepsake to remember your graduation day. Limited stock each year.',
+                          );
+                        },
+                        child: const ProductCard(
+                          title: 'Graduation Hoodie',
+                          price: '£35.00',
+                          imageUrl: 'assets/images/graduationhoodie.jpg',
+                        ),
+                      ),
+                      // add similar blocks for other graduation items
+                    ],
                   );
                 },
               ),
@@ -231,70 +247,3 @@ final List<GraduationProduct> _graduationProducts = [
   ),
 ];
 
-class _ProductCard extends StatelessWidget {
-  final GraduationProduct product;
-
-  const _ProductCard({required this.product});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            color: Colors.white,
-            child: Image.asset(
-              product.imagePath,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          product.name,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 4),
-        if (product.soldOut)
-          Text(
-            'Sold out',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: Colors.grey.shade700,
-            ),
-          )
-        else
-          Row(
-            children: [
-              if (product.compareAtPrice != null)
-                Text(
-                  '£${product.compareAtPrice!.toStringAsFixed(2)}',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    decoration: TextDecoration.lineThrough,
-                    color: Colors.grey.shade600,
-                  ),
-                ),
-              if (product.compareAtPrice != null) const SizedBox(width: 4),
-              if (product.price != null)
-                Text(
-                  '£${product.price!.toStringAsFixed(2)}',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: product.compareAtPrice != null
-                        ? Colors.black
-                        : Colors.black,
-                    fontWeight: product.compareAtPrice != null
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                  ),
-                ),
-            ],
-          ),
-      ],
-    );
-  }
-}
