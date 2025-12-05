@@ -28,7 +28,7 @@ class GraduationPage extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   Image.asset(
-                    'assets/images/graduation_hero.jpg',
+                    'assets/images/graduationbear.png',
                     fit: BoxFit.cover,
                   ),
                   // ignore: deprecated_member_use

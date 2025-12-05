@@ -163,7 +163,7 @@ class _ClothingPageState extends State<ClothingPage> {
                     title: 'Classic Sweatshirts - Neutral',
                     price: '£10.99',
                     originalPrice: '£17.00',
-                    imageUrl: 'assets/images/grey_hoodie.png',
+                    imageUrl: 'assets/images/neutralsweatshirt.png',
                   ),
                   ProductCard(
                     title: 'Graduation Hoodie',
