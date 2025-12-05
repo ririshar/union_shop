@@ -206,19 +206,19 @@ class SaleProduct {
 final List<SaleProduct> _saleProducts = [
   SaleProduct(
     name: 'A5 Notepad',
-    imagePath: 'assets/images/sale_a5_notepad.jpg',
+    imagePath: 'assets/images/notebook.png',
     price: '£1.80',
     soldOut: true,
   ),
   SaleProduct(
     name: 'Classic Sweatshirts – Neutral',
-    imagePath: 'assets/images/sale_classic_sweatshirt_neutral.jpg',
+    imagePath: 'assets/images/classicsweatshirt.png',
     originalPrice: '£17.00',
     price: '£10.99',
   ),
   SaleProduct(
     name: 'Recycled Notebook',
-    imagePath: 'assets/images/sale_recycled_notebook.jpg',
+    imagePath: 'assets/images/notebook.png',
     price: '£1.80',
   ),
 
@@ -231,13 +231,13 @@ final List<SaleProduct> _saleProducts = [
   ),
   SaleProduct(
     name: 'Type C Charge & Sync Cable',
-    imagePath: 'assets/images/sale_typec_cable.jpg',
+    imagePath: 'assets/images/cable.png',
     originalPrice: '£3.00',
     price: '£1.50',
   ),
   SaleProduct(
     name: 'USB to USB Charge & Sync Cables',
-    imagePath: 'assets/images/sale_usb_usb_cable.jpg',
+    imagePath: 'assets/images/cable.png',
     originalPrice: '£3.00',
     price: '£1.50',
   ),
@@ -245,19 +245,19 @@ final List<SaleProduct> _saleProducts = [
   // Row 3
   SaleProduct(
     name: 'Dimple Pop Fidget Keyring',
-    imagePath: 'assets/images/sale_dimple_pop_keyring.jpg',
+    imagePath: 'assets/images/popkeyring.png',
     originalPrice: '£1.50',
     price: '£0.99',
   ),
   SaleProduct(
     name: 'Nike Academy 18 Tech Pants (W)',
-    imagePath: 'assets/images/sale_nike_pants_w.jpg',
+    imagePath: 'assets/images/nikepantsw.png',
     originalPrice: '£24.99',
     price: '£7.00',
   ),
   SaleProduct(
     name: 'Nike Academy 18 Tech Pants (M)',
-    imagePath: 'assets/images/sale_nike_pants_m.jpg',
+    imagePath: 'assets/images/nikepantsm.png',
     originalPrice: '£24.99',
     price: '£7.00',
     soldOut: true,
