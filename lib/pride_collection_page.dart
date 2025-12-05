@@ -111,7 +111,7 @@ class PrideCollectionPage extends StatelessWidget {
                                 title: 'Classic Rainbow Hoodies',
                                 originalPrice: '£30.00',
                                 price: '£12.99',
-                                imageUrl: 'assets/images/pride_hoodie.png',
+                                imageUrl: 'assets/images/rainbowhoodie.png',
                               ),
                             ),
                             // 2
@@ -120,7 +120,7 @@ class PrideCollectionPage extends StatelessWidget {
                                 title: 'Pride Flag Pin',
                                 originalPrice: '£1.00',
                                 price: '£0.50',
-                                imageUrl: 'assets/images/pride_pin.png',
+                                imageUrl: 'assets/images/pridepin.png',
                               ),
                             ),
                             // 3
@@ -128,7 +128,7 @@ class PrideCollectionPage extends StatelessWidget {
                               child: ProductCard(
                                 title: 'Rainbow Lanyard',
                                 price: '£2.75',
-                                imageUrl: 'assets/images/pride_lanyard.png',
+                                imageUrl: 'assets/images/rainbowlanyard.png',
                               ),
                             ),
                             // 4
@@ -136,7 +136,7 @@ class PrideCollectionPage extends StatelessWidget {
                               child: ProductCard(
                                 title: 'Pride Silicone Bracelet',
                                 price: '£1.00',
-                                imageUrl: 'assets/images/pride_bracelet.png',
+                                imageUrl: 'assets/images/pridebracelet.png',
                               ),
                             ),
                           ],

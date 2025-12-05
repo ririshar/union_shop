@@ -40,7 +40,7 @@ class PrintShackPersonalisationPage extends StatelessWidget {
                                 AspectRatio(
                                   aspectRatio: 1,
                                   child: Image.asset(
-                                    'assets/images/personalisation_main.jpg',
+                                    'assets/images/yournamehoodie.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -51,7 +51,7 @@ class PrintShackPersonalisationPage extends StatelessWidget {
                                       child: AspectRatio(
                                         aspectRatio: 1,
                                         child: Image.asset(
-                                          'assets/images/personalisation_thumb1.jpg',
+                                          'assets/images/threeziphoodie.jpg',
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -61,7 +61,7 @@ class PrintShackPersonalisationPage extends StatelessWidget {
                                       child: AspectRatio(
                                         aspectRatio: 1,
                                         child: Image.asset(
-                                          'assets/images/personalisation_thumb2.jpg',
+                                          'assets/images/shoodie.png',
                                           fit: BoxFit.cover,
                                         ),
                                       ),

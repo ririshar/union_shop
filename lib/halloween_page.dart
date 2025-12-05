@@ -38,7 +38,7 @@ class HalloweenPage extends StatelessWidget {
                         AspectRatio(
                           aspectRatio: 3 / 4,
                           child: Image.asset(
-                            'assets/images/halloween_tote_main.png',
+                            'assets/images/bootote.png',
                             fit: BoxFit.cover,
                           ),
                         ),
