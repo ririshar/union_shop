@@ -145,7 +145,7 @@ class _MerchandisePageState extends State<MerchandisePage> {
                   ProductCard(
                     title: 'ID Holders',
                     price: '£0.75',
-                    imageUrl: 'assets/images/id_holder.png',
+                    imageUrl: 'assets/images/idholder.png',
                   ),
                   ProductCard(
                     title: 'Lanyards',
@@ -155,19 +155,19 @@ class _MerchandisePageState extends State<MerchandisePage> {
                   ProductCard(
                     title: 'Graduation bears',
                     price: 'Sold out',
-                    imageUrl: 'assets/images/graduation_bear.png',
+                    imageUrl: 'assets/images/graduationbear.png',
                   ),
 
                   // Row 2
                   ProductCard(
                     title: 'UoP Cotton Shopper',
                     price: '£1.99',
-                    imageUrl: 'assets/images/cotton_shopper.png',
+                    imageUrl: 'assets/images/cottonshopper.png',
                   ),
                   ProductCard(
                     title: 'Rainbow Lanyard',
                     price: '£2.75',
-                    imageUrl: 'assets/images/rainbow_lanyard.png',
+                    imageUrl: 'assets/images/rainbowlanyard.png',
                   ),
                   ProductCard(
                     title: 'Pen',
@@ -179,19 +179,19 @@ class _MerchandisePageState extends State<MerchandisePage> {
                   ProductCard(
                     title: 'Lapel Pin',
                     price: '£4.00',
-                    imageUrl: 'assets/images/lapel_pin.png',
+                    imageUrl: 'assets/images/lapelpin.png',
                   ),
                   ProductCard(
                     title: 'Crested Tie',
                     originalPrice: '£15.00',
                     price: '£10.99',
-                    imageUrl: 'assets/images/crested_tie.png',
+                    imageUrl: 'assets/images/graduationtie.png',
                   ),
                   ProductCard(
                     title: 'Crested Badge',
                     originalPrice: '£7.00',
                     price: '£4.99',
-                    imageUrl: 'assets/images/crested_badge.png',
+                    imageUrl: 'assets/images/graduationbadge.png',
                   ),
                 ],
               ),
