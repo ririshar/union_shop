@@ -845,18 +845,193 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        openProductPage(
-          context,
-          title: title,
-          price: price,
-          originalPrice: originalPrice,
-          imageUrl: imageUrl,
-          description:
-              'Our best selling Classic Hoodie comes in a range of colours.\n\n'
-              'Double fabric hood, kangaroo pouch pocket and ribbed cuff and hem.',
-          extraInfo:
-              'Want to add your name or course on the back? This product is available for personalisation too.',
-        );
+        // Essential Zip Hoodie
+        if (title == 'Limited Edition Essential Zip Hoodie') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            originalPrice: originalPrice,
+            imageUrl: imageUrl,
+            colours: const ['Pink', 'Black', 'Grey'],
+            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+            description:
+                'Our Limited Edition Essential Zip Hoodie keeps you warm on campus with a cosy fleece interior and full zip front. Finished with the University crest on the chest.',
+            extraInfo:
+                'Available for personalisation via The Print Shack (add your name or course on the back).',
+            features: const [
+              'Brushed fleece inner for extra warmth',
+              'Full length zip',
+              'Two front pockets',
+              'UPSU crest print on chest',
+            ],
+            careInstructions:
+                'Machine wash at 30°C. Wash inside out with similar colours. Do not iron print.',
+          );
+
+        // Essential T‑Shirt
+        } else if (title == 'Essential T-Shirt') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            originalPrice: originalPrice,
+            imageUrl: imageUrl,
+            colours: const ['Pink', 'White', 'Black'],
+            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+            description:
+                'Everyday Essential T‑Shirt with a classic unisex fit and soft cotton feel. Perfect for lectures, the library or lounging.',
+            extraInfo:
+                'Great on its own or layered under your favourite hoodie.',
+            features: const [
+              'Regular unisex fit',
+              'Soft cotton‑feel fabric',
+              'Printed University logo on chest',
+            ],
+            careInstructions:
+                'Machine wash at 30°C. Tumble dry low. Do not bleach.',
+
+        // Signature Hoodie
+          );
+
+        } else if (title == 'Signature Hoodie') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            colours: const ['Black', 'Navy'],
+            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+            description:
+                'Premium Signature Hoodie with thicker fabric, a soft brushed inner and a high‑quality finish for everyday wear.',
+            extraInfo:
+                'Part of the Signature range – designed to last long after graduation.',
+            features: const [
+              'Heavyweight fabric',
+              'Metal‑tipped drawcords',
+              'Kangaroo pocket',
+              'Embroidered University logo',
+            ],
+            careInstructions:
+                'Machine wash at 30°C. Do not tumble dry. Do not iron print.',
+
+        // Signature T‑Shirt
+          );
+
+        } else if (title == 'Signature T-Shirt') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            colours: const ['White', 'Black'],
+            sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+            description:
+                'Signature T‑Shirt with a premium feel and subtle branding for a smarter everyday look.',
+            extraInfo:
+                'Pairs perfectly with the Signature Hoodie and joggers.',
+            features: const [
+              'Premium soft‑touch fabric',
+              'Slightly slimmer, modern fit',
+              'Subtle embroidered logo on chest',
+            ],
+            careInstructions:
+                'Machine wash at 30°C. Do not bleach. Cool iron on reverse.',
+
+        // Portsmouth City Postcard
+          );
+
+        } else if (title == 'Portsmouth City Postcard') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            description:
+                'Postcard featuring a custom illustration of Portsmouth landmarks – a perfect little keepsake or to send home.',
+            extraInfo:
+                'Printed on quality card stock with a gloss finish front.',
+            colours: const [],
+            sizes: const [],
+            features: const [
+              'A6 postcard size',
+              'High‑quality card stock',
+              'Gloss finish front',
+              'Blank reverse for your message',
+            ],
+          );
+
+        // Portsmouth City Magnet
+        } else if (title == 'Portsmouth City Magnet') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            description:
+                'Fridge magnet with a Portsmouth skyline illustration to brighten up any kitchen.',
+            extraInfo: 'A great small gift or souvenir from Portsmouth.',
+            colours: const [],
+            sizes: const [],
+            features: const [
+              'Strong magnet backing',
+              'Full colour print',
+            ],
+            careInstructions: 'Wipe clean with a damp cloth.',
+
+        // Portsmouth City Bookmark – example SOLD OUT
+        } else if (title == 'Portsmouth City Bookmark') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            description:
+                'Bookmark with a bespoke Portsmouth design – ideal for textbooks and bedtime reading.',
+            extraInfo: 'This item is currently out of stock.',
+            colours: const [],
+            sizes: const [],
+            soldOut: true,
+            features: const [
+              'Durable laminated finish',
+              'Double‑sided full‑colour print',
+            ],
+            careInstructions: 'Wipe clean with a dry cloth.',
+
+        // Portsmouth City Notebook
+        } else if (title == 'Portsmouth City Notebook') {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            imageUrl: imageUrl,
+            description:
+                'A5 notebook featuring Portsmouth City artwork on the cover – perfect for lecture notes or journaling.',
+            extraInfo:
+                'Ideal study companion or gift for Portsmouth students.',
+            colours: const [],
+            sizes: const [],
+            features: const [
+              'A5 size',
+              'Lined pages',
+              'Full‑colour printed cover',
+            ],
+          );
+
+        // Fallback for anything else
+        } else {
+          openProductPage(
+            context,
+            title: title,
+            price: price,
+            originalPrice: originalPrice,
+            imageUrl: imageUrl,
+            description:
+                'University branded product from the Union Shop.\n\nCheck the product options above for full details.',
+            extraInfo:
+                'Looking to personalise this item? Visit The Print Shack section for more information.',
+          );
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
