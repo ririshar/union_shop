@@ -48,19 +48,19 @@ class HalloweenPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _ThumbImage(
-                              'assets/images/halloween_tote_1.png',
+                              'assets/images/pumpkintote.png',
                             ),
                             SizedBox(width: 12),
                             _ThumbImage(
-                              'assets/images/halloween_tote_2.png',
+                              'assets/images/pumpkintote.png',
                             ),
                             SizedBox(width: 12),
                             _ThumbImage(
-                              'assets/images/halloween_tote_3.png',
+                              'assets/images/bootote.png',
                             ),
                             SizedBox(width: 12),
                             _ThumbImage(
-                              'assets/images/halloween_tote_4.png',
+                              'assets/images/ghosttote.png',
                             ),
                           ],
                         ),
