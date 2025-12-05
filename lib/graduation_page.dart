@@ -209,45 +209,45 @@ class GraduationProduct {
 final List<GraduationProduct> _graduationProducts = [
   GraduationProduct(
     name: 'Graduation Hoodies',
-    imagePath: 'assets/images/graduation_hoodie.jpg',
+    imagePath: 'assets/images/graduationhoodie.jpg',
     price: 35.00,
   ),
   GraduationProduct(
     name: 'Graduation bears',
-    imagePath: 'assets/images/graduation_bear.jpg',
+    imagePath: 'assets/images/graduationbear.png',
     soldOut: true,
   ),
   GraduationProduct(
     name: 'Graduation 3/4 Zipped Sweatshirt',
-    imagePath: 'assets/images/graduation_sweatshirt.jpg',
+    imagePath: 'assets/images/threeziphoodie.jpg',
     price: 45.00,
   ),
   GraduationProduct(
     name: 'Crested Tie',
-    imagePath: 'assets/images/graduation_tie.jpg',
+    imagePath: 'assets/images/graduationtie.png',
     price: 10.99,
     compareAtPrice: 15.00,
   ),
   GraduationProduct(
     name: 'Crested Notebook',
-    imagePath: 'assets/images/graduation_notebook.jpg',
+    imagePath: 'assets/images/graduationnotebook.png',
     price: 7.99,
     compareAtPrice: 10.50,
   ),
   GraduationProduct(
     name: 'Crested Badge',
-    imagePath: 'assets/images/graduation_badge.jpg',
+    imagePath: 'assets/images/graduationbadge.png',
     price: 4.99,
     compareAtPrice: 7.00,
   ),
   GraduationProduct(
     name: 'Waterproof Poncho',
-    imagePath: 'assets/images/graduation_poncho.jpg',
+    imagePath: 'assets/images/graduationponcho.png',
     price: 1.99,
   ),
   GraduationProduct(
     name: 'Graduation Cotton Shopper',
-    imagePath: 'assets/images/graduation_bag.jpg',
+    imagePath: 'assets/images/graduationbag.png',
     price: 2.50,
   ),
 ];
