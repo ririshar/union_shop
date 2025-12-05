@@ -45,14 +45,10 @@ class _ClothingPageState extends State<ClothingPage> {
       colour: 'Purple',
       size: 'XS-XL',
     ),
-
-    // --- Headwear / accessories you mentioned ---
-
     Product(
       title: 'Cap',
       price: '£10.00',
-      imageUrl:
-          'assets/images/classiccap.png', // update if your filename is different
+      imageUrl: 'assets/images/classiccap.png',
       category: 'Headwear',
       colour: 'Purple',
       size: 'One size',
@@ -60,7 +56,7 @@ class _ClothingPageState extends State<ClothingPage> {
     Product(
       title: 'Beanie',
       price: '£10.00',
-      imageUrl: 'assets/images/classicbeaniehat.png', // update if needed
+      imageUrl: 'assets/images/classicbeaniehat.png',
       category: 'Headwear',
       colour: 'Purple',
       size: 'One size',
@@ -89,24 +85,24 @@ class _ClothingPageState extends State<ClothingPage> {
     final colours = _allProducts.map((p) => p.colour).toSet().toList()..sort();
 
     return Scaffold(
+      // If you prefer no app bar because TopHeader already has one, you can remove this.
       appBar: AppBar(
         title: const Text('Clothing'),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
+            constraints: const BoxConstraints(maxWidth: 1200),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: TopHeader(
-                    activeLabel: 'Shop',
-                    placeholderCallbackForButtons:
-                        _placeholderCallbackForButtons,
-                  ),
+                // Top header – no extra scroll view, it should handle its own layout
+                TopHeader(
+                  activeLabel: 'Shop',
+                  placeholderCallbackForButtons: _placeholderCallbackForButtons,
                 ),
+
+                // Main clothing content
                 Container(
                   color: Colors.white,
                   padding:
@@ -169,10 +165,9 @@ class _ClothingPageState extends State<ClothingPage> {
                     ],
                   ),
                 ),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: AppFooter(),
-                ),
+
+                // Footer – again, no extra scroll view
+                const AppFooter(),
               ],
             ),
           ),
