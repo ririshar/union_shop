@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart'; // to use TopHeader and AppFooter
 
 /// Arguments passed from your ProductCard / openProductPage
 class ProductDetailArgs {
@@ -39,6 +40,10 @@ class ProductDetailArgs {
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
+  void _placeholderCallbackForButtons() {
+    // same idea as in HomeScreen/AboutScreen
+  }
+
   @override
   Widget build(BuildContext context) {
     final args =
@@ -47,116 +52,125 @@ class ProductPage extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(args.title),
-        backgroundColor: const Color(0xFF4d2963),
-      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ---------- IMAGE + MAIN INFO ----------
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final isWide = constraints.maxWidth > 700;
-
-                final imageWidget = Expanded(
-                  flex: 3,
-                  child: AspectRatio(
-                    aspectRatio: 4 / 5,
-                    child: args.imageUrl.startsWith('http')
-                        ? Image.network(args.imageUrl, fit: BoxFit.cover)
-                        : Image.asset(args.imageUrl, fit: BoxFit.cover),
-                  ),
-                );
-
-                final detailsWidget = Expanded(
-                  flex: 4,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: isWide ? 24 : 0, top: isWide ? 0 : 24),
-                    child: _MainDetails(args: args),
-                  ),
-                );
-
-                if (isWide) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      imageWidget,
-                      detailsWidget,
-                    ],
-                  );
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    imageWidget,
-                    detailsWidget,
-                  ],
-                );
-              },
+            TopHeader(
+              activeLabel: 'Shop',
+              placeholderCallbackForButtons: _placeholderCallbackForButtons,
             ),
-
-            const SizedBox(height: 32),
-
-            // ---------- DESCRIPTION ----------
-            if (args.description.isNotEmpty) ...[
-              Text(
-                'Product Description',
-                style: theme.textTheme.titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Text(args.description),
-            ],
-
-            // ---------- FEATURES ----------
-            if (args.features.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              Text(
-                'Features',
-                style: theme.textTheme.titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Column(
+            // main product content
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(24),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: args.features
-                    .map(
-                      (f) => Row(
+                children: [
+                  // ---------- IMAGE + MAIN INFO ----------
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isWide = constraints.maxWidth > 700;
+
+                      final imageWidget = Expanded(
+                        flex: 3,
+                        child: AspectRatio(
+                          aspectRatio: 4 / 5,
+                          child: args.imageUrl.startsWith('http')
+                              ? Image.network(args.imageUrl, fit: BoxFit.cover)
+                              : Image.asset(args.imageUrl, fit: BoxFit.cover),
+                        ),
+                      );
+
+                      final detailsWidget = Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: isWide ? 24 : 0, top: isWide ? 0 : 24),
+                          child: _MainDetails(args: args),
+                        ),
+                      );
+
+                      if (isWide) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            imageWidget,
+                            detailsWidget,
+                          ],
+                        );
+                      }
+                      return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('• '),
-                          Expanded(child: Text(f)),
+                          imageWidget,
+                          detailsWidget,
                         ],
-                      ),
-                    )
-                    .toList(),
-              ),
-            ],
+                      );
+                    },
+                  ),
 
-            // ---------- CARE INSTRUCTIONS ----------
-            if (args.careInstructions.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              Text(
-                'Care Instructions',
-                style: theme.textTheme.titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Text(args.careInstructions),
-            ],
+                  const SizedBox(height: 32),
 
-            // ---------- EXTRA INFO ----------
-            if (args.extraInfo.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              Text(
-                args.extraInfo,
-                style: const TextStyle(fontStyle: FontStyle.italic),
+                  // ---------- DESCRIPTION ----------
+                  if (args.description.isNotEmpty) ...[
+                    Text(
+                      'Product Description',
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(args.description),
+                  ],
+
+                  // ---------- FEATURES ----------
+                  if (args.features.isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      'Features',
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: args.features
+                          .map(
+                            (f) => Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('• '),
+                                Expanded(child: Text(f)),
+                              ],
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ],
+
+                  // ---------- CARE INSTRUCTIONS ----------
+                  if (args.careInstructions.isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      'Care Instructions',
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(args.careInstructions),
+                  ],
+
+                  // ---------- EXTRA INFO ----------
+                  if (args.extraInfo.isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      args.extraInfo,
+                      style: const TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ],
+                ],
               ),
-            ],
+            ),
+            const AppFooter(),
           ],
         ),
       ),

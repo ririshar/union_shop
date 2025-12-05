@@ -51,6 +51,7 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
+// ...existing code...
 void openProductPage(
   BuildContext context, {
   required String title,
@@ -59,6 +60,11 @@ void openProductPage(
   required String imageUrl,
   String description = '',
   String extraInfo = '',
+  bool soldOut = false,
+  List<String> colours = const [],
+  List<String> sizes = const [],
+  List<String> features = const [],
+  String careInstructions = '',
 }) {
   Navigator.of(context).pushNamed(
     '/product',
@@ -67,13 +73,17 @@ void openProductPage(
       price: price,
       originalPrice: originalPrice,
       imageUrl: imageUrl,
-      colours: const ['Purple', 'Grey', 'Black'],
-      sizes: const ['XS', 'S', 'M', 'L', 'XL'],
+      colours: colours,
+      sizes: sizes,
       description: description,
       extraInfo: extraInfo,
+      soldOut: soldOut,
+      features: features,
+      careInstructions: careInstructions,
     ),
   );
 }
+// ...existing code...
 
 // TopHeader: shared header used by HomeScreen and AboutScreen so tabs stay in the same place
 class TopHeader extends StatelessWidget {
