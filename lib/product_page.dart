@@ -224,30 +224,39 @@ class _MainDetailsState extends State<_MainDetails> {
         Row(
           children: [
             if (args.originalPrice != null) ...[
-              Text(
-                args.originalPrice!,
-                style: const TextStyle(
-                  decoration: TextDecoration.lineThrough,
-                  color: Colors.grey,
+              Flexible(
+                child: Text(
+                  args.originalPrice!,
+                  style: const TextStyle(
+                    decoration: TextDecoration.lineThrough,
+                    color: Colors.grey,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 8),
             ],
-            Text(
-              args.price,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            Flexible(
+              child: Text(
+                args.price,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             if (args.soldOut) ...[
               const SizedBox(width: 12),
-              const Text(
-                'SOLD OUT',
-                style: TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
+              const Flexible(
+                child: Text(
+                  'SOLD OUT',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

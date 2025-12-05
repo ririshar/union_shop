@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/main.dart'; // for TopHeader, AppFooter, ProductCard
-import 'package:union_shop/product.dart';
-import 'package:union_shop/product_filters.dart';
+import 'package:union_shop/main.dart'; // TopHeader, AppFooter, ProductCard
+import 'package:union_shop/product.dart'; // your original Product model
+import 'package:union_shop/product_filters.dart'; // your original filters widget
 
 class ClothingPage extends StatefulWidget {
   const ClothingPage({super.key});
@@ -11,43 +11,61 @@ class ClothingPage extends StatefulWidget {
 }
 
 class _ClothingPageState extends State<ClothingPage> {
-  // Full clothing list
+  // ORIGINAL clothing products + hats / beanie 
   final List<Product> _allProducts = const [
     Product(
-      title: 'Limited Edition Essential Zip Hoodie',
-      price: '£14.00',
-      originalPrice: '£20.00',
-      imageUrl: 'assets/images/pink.png',
+      title: 'Classic Hoodie',
+      price: '£25.00',
+      imageUrl: 'assets/images/classichoodie.png',
       category: 'Hoodie',
-      colour: 'Pink',
+      colour: 'Purple',
       size: 'XS-XL',
     ),
     Product(
-      title: 'Essential T-Shirt',
-      price: '£6.00',
-      originalPrice: '£10.00',
-      imageUrl: 'assets/images/pink_tshirt.png',
-      category: 'T‑Shirt',
-      colour: 'Pink',
+      title: 'Classic Hoodie (Grey)',
+      price: '£25.00',
+      imageUrl: 'assets/images/classicsweatshirt.png',
+      category: 'Hoodie',
+      colour: 'Grey',
       size: 'XS-XL',
     ),
     Product(
-      title: 'Signature Hoodie',
-      price: '£32.99',
-      imageUrl: 'assets/images/shoodie.png',
+      title: 'Classic Hoodie (Black)',
+      price: '£25.00',
+      imageUrl: 'assets/images/classichoodie.png',
       category: 'Hoodie',
       colour: 'Black',
       size: 'XS-XL',
     ),
     Product(
-      title: 'Signature T-Shirt',
-      price: '£14.99',
-      imageUrl: 'assets/images/sshirt.png',
+      title: 'Classic T-Shirt',
+      price: '£12.00',
+      imageUrl: 'assets/images/classictshirt.png',
       category: 'T‑Shirt',
-      colour: 'Black',
+      colour: 'Purple',
       size: 'XS-XL',
     ),
-    // add more clothing here...
+
+    // --- Headwear / accessories you mentioned ---
+
+    Product(
+      title: 'Cap',
+      price: '£10.00',
+      imageUrl: 'assets/images/classiccap.png', // update if your filename is different
+      category: 'Headwear',
+      colour: 'Purple',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Beanie',
+      price: '£10.00',
+      imageUrl: 'assets/images/classicbeaniehat.png', // update if needed
+      category: 'Headwear',
+      colour: 'Purple',
+      size: 'One size',
+    ),
+  
+    
   ];
 
   String? _selectedCategory;
@@ -75,9 +93,12 @@ class _ClothingPageState extends State<ClothingPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TopHeader(
-              activeLabel: 'Shop',
-              placeholderCallbackForButtons: _placeholderCallbackForButtons,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: TopHeader(
+                activeLabel: 'Shop',
+                placeholderCallbackForButtons: _placeholderCallbackForButtons,
+              ),
             ),
             Container(
               color: Colors.white,
@@ -110,29 +131,38 @@ class _ClothingPageState extends State<ClothingPage> {
 
                   const SizedBox(height: 24),
 
-                  // Product grid using ProductCard (so your product page still works)
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 800 ? 3 : 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 24,
-                    childAspectRatio: 3 / 4,
-                    children: _filteredProducts.map((p) {
-                      return ProductCard(
-                        title: p.title,
-                        price: p.price,
-                        originalPrice: p.originalPrice,
-                        imageUrl: p.imageUrl,
-                        highlightPrice: p.originalPrice == null,
+                  // Product grid using ProductCard
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final crossAxisCount = constraints.maxWidth > 800 ? 3 : 2;
+                      final childAspectRatio = constraints.maxWidth / (crossAxisCount * 300);
+
+                      return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 24,
+                        childAspectRatio: childAspectRatio,
+                        children: _filteredProducts.map((p) {
+                          return ProductCard(
+                            title: p.title,
+                            price: p.price,
+                            originalPrice: p.originalPrice,
+                            imageUrl: p.imageUrl,
+                            highlightPrice: p.originalPrice == null,
+                          );
+                        }).toList(),
                       );
-                    }).toList(),
+                    },
                   ),
                 ],
               ),
             ),
-            const AppFooter(),
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: AppFooter(),
+            ),
           ],
         ),
       ),
