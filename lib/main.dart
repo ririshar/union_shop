@@ -554,30 +554,28 @@ class HomeScreen extends StatelessWidget {
                             childAspectRatio: 1,
                             children: [
                               NavSquare(
-                                imageUrl: 'assets/images/square1.jpg',
-                                label: 'Apparel',
+                                imageUrl: 'assets/images/graduationhoodie.jpg',
+                                label: 'Graduation',
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => const GraduationPage()),
-                                  );
+                                  // use named route to match your routes map
+                                  Navigator.of(context)
+                                      .pushNamed('/shop/graduation');
                                 },
                               ),
                               NavSquare(
-                                imageUrl: 'assets/images/square2.jpg',
-                                label: 'Collections',
+                                imageUrl: 'assets/images/notebook.png',
+                                label: 'Merchandise',
                                 onTap: () => Navigator.of(context)
-                                    .pushNamed('/collection'),
+                                    .pushNamed('/shop/merchandise'),
                               ),
                               NavSquare(
-                                imageUrl: 'assets/images/square3.jpg',
-                                label: 'Personalisation',
+                                imageUrl: 'assets/images/classichoodie.png',
+                                label: 'Clothing',
                                 onTap: () => Navigator.of(context)
-                                    .pushNamed('/printshack'),
+                                    .pushNamed('/shop/clothing'),
                               ),
                               NavSquare(
-                                imageUrl: 'assets/images/square4.jpg',
+                                imageUrl: 'assets/images/keyring.png',
                                 label: 'Contact / Info',
                                 onTap: () =>
                                     Navigator.of(context).pushNamed('/about'),

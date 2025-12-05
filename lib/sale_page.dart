@@ -225,7 +225,7 @@ final List<SaleProduct> _saleProducts = [
   // Row 2
   SaleProduct(
     name: 'iPhone 5/6 Charge & Sync Cable',
-    imagePath: 'assets/images/sale_iphone56_cable.jpg',
+    imagePath: 'assets/images/cable.png',
     originalPrice: '£3.00',
     price: '£1.50',
   ),
