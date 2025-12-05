@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // to use TopHeader and AppFooter
+import 'main.dart';
+import 'package:union_shop/cart.dart'; // to use TopHeader and AppFooter
 
 /// Arguments passed from your ProductCard / openProductPage
 class ProductDetailArgs {
@@ -302,33 +303,47 @@ class _MainDetailsState extends State<_MainDetails> {
         ],
 
         // Add to basket / Sold out button
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: args.soldOut
-                ? null
-                : () {
-                    // TODO: hook into your basket logic
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('${args.title} added to basket'),
-                      ),
-                    );
-                  },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF4d2963),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-            ),
-            child: Text(
-              args.soldOut ? 'SOLD OUT' : 'ADD TO BASKET',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
+        //// dart
+// filepath: c:\Users\riris\Desktop\Union shop\union_shop\lib\product_page.dart
+// ...inside _MainDetailsState.build...
+SizedBox(
+  width: double.infinity,
+  child: ElevatedButton(
+    onPressed: args.soldOut
+        ? null
+        : () {
+            // build a cart item from current selection
+            final cartItem = CartItem(
+              title: args.title,
+              imageUrl: args.imageUrl,
+              price: args.price,
+              size: selectedSize,
+              colour: selectedColour,
+              quantity: 1,
+            );
+            UnionShopApp.cart.addItem(cartItem);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${args.title} added to basket'),
               ),
-            ),
-          ),
-        ),
+            );
+          },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color(0xFF4d2963),
+      foregroundColor: Colors.white,
+      padding:
+          const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+    ),
+    child: Text(
+      args.soldOut ? 'SOLD OUT' : 'ADD TO BASKET',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1,
+      ),
+    ),
+  ),
+),
       ],
     );
   }

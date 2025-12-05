@@ -12,7 +12,9 @@ import 'package:union_shop/portsmouth_city_page.dart';
 import 'package:union_shop/pride_collection_page.dart';
 import 'package:union_shop/print_shack_about_page.dart';
 import 'package:union_shop/sale_page.dart';
-import 'package:union_shop/search_page.dart';
+import 'package:union_shop/search_page.dart'; //// dart
+import 'package:union_shop/cart.dart';
+import 'package:union_shop/cart_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -20,6 +22,8 @@ void main() {
 
 class UnionShopApp extends StatelessWidget {
   const UnionShopApp({super.key});
+
+  static final CartModel cart = CartModel();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,7 @@ class UnionShopApp extends StatelessWidget {
             const PrintShackPersonalisationPage(),
         '/sale': (context) => const SalePage(),
         '/search': (context) => const SearchPage(),
+        '/cart': (context) => CartPage(cart: UnionShopApp.cart),
       },
     );
   }
@@ -241,14 +246,17 @@ class TopHeader extends StatelessWidget {
                               const BoxConstraints(minWidth: 32, minHeight: 32),
                           onPressed: placeholderCallbackForButtons,
                         ),
+                       
                         IconButton(
                           icon: const Icon(Icons.shopping_bag_outlined,
                               size: 18, color: Colors.grey),
                           padding: const EdgeInsets.all(8),
                           constraints:
                               const BoxConstraints(minWidth: 32, minHeight: 32),
-                          onPressed: placeholderCallbackForButtons,
-                        ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/cart');
+             },
+),
                         IconButton(
                           icon: const Icon(Icons.menu,
                               size: 18, color: Colors.grey),
@@ -869,7 +877,7 @@ class ProductCard extends StatelessWidget {
                 'Machine wash at 30°C. Wash inside out with similar colours. Do not iron print.',
           );
 
-        // Essential T‑Shirt
+          // Essential T‑Shirt
         } else if (title == 'Essential T-Shirt') {
           openProductPage(
             context,
@@ -891,9 +899,8 @@ class ProductCard extends StatelessWidget {
             careInstructions:
                 'Machine wash at 30°C. Tumble dry low. Do not bleach.',
 
-        // Signature Hoodie
+            // Signature Hoodie
           );
-
         } else if (title == 'Signature Hoodie') {
           openProductPage(
             context,
@@ -915,9 +922,8 @@ class ProductCard extends StatelessWidget {
             careInstructions:
                 'Machine wash at 30°C. Do not tumble dry. Do not iron print.',
 
-        // Signature T‑Shirt
+            // Signature T‑Shirt
           );
-
         } else if (title == 'Signature T-Shirt') {
           openProductPage(
             context,
@@ -928,8 +934,7 @@ class ProductCard extends StatelessWidget {
             sizes: const ['XS', 'S', 'M', 'L', 'XL'],
             description:
                 'Signature T‑Shirt with a premium feel and subtle branding for a smarter everyday look.',
-            extraInfo:
-                'Pairs perfectly with the Signature Hoodie and joggers.',
+            extraInfo: 'Pairs perfectly with the Signature Hoodie and joggers.',
             features: const [
               'Premium soft‑touch fabric',
               'Slightly slimmer, modern fit',
@@ -938,9 +943,8 @@ class ProductCard extends StatelessWidget {
             careInstructions:
                 'Machine wash at 30°C. Do not bleach. Cool iron on reverse.',
 
-        // Portsmouth City Postcard
+            // Portsmouth City Postcard
           );
-
         } else if (title == 'Portsmouth City Postcard') {
           openProductPage(
             context,
@@ -961,7 +965,7 @@ class ProductCard extends StatelessWidget {
             ],
           );
 
-        // Portsmouth City Magnet
+          // Portsmouth City Magnet
         } else if (title == 'Portsmouth City Magnet') {
           openProductPage(
             context,
@@ -980,26 +984,25 @@ class ProductCard extends StatelessWidget {
             careInstructions: 'Wipe clean with a damp cloth.',
           );
 
-        // Portsmouth City Bookmark – example SOLD OUT
+          // Portsmouth City Bookmark – example SOLD OUT
         } else if (title == 'Portsmouth City Bookmark') {
-          openProductPage(
-            context,
-            title: title,
-            price: price,
-            imageUrl: imageUrl,
-            description:
-                'Bookmark with a bespoke Portsmouth design – ideal for textbooks and bedtime reading.',
-            extraInfo: 'This item is currently out of stock.',
-            colours: const [],
-            sizes: const [],
-            soldOut: true,
-            features: const [
-              'Durable laminated finish',
-              'Double‑sided full‑colour print',
-            ],
-            careInstructions: 'Wipe clean with a dry cloth.');
+          openProductPage(context,
+              title: title,
+              price: price,
+              imageUrl: imageUrl,
+              description:
+                  'Bookmark with a bespoke Portsmouth design – ideal for textbooks and bedtime reading.',
+              extraInfo: 'This item is currently out of stock.',
+              colours: const [],
+              sizes: const [],
+              soldOut: true,
+              features: const [
+                'Durable laminated finish',
+                'Double‑sided full‑colour print',
+              ],
+              careInstructions: 'Wipe clean with a dry cloth.');
 
-        // Portsmouth City Notebook
+          // Portsmouth City Notebook
         } else if (title == 'Portsmouth City Notebook') {
           openProductPage(
             context,
@@ -1008,8 +1011,7 @@ class ProductCard extends StatelessWidget {
             imageUrl: imageUrl,
             description:
                 'A5 notebook featuring Portsmouth City artwork on the cover – perfect for lecture notes or journaling.',
-            extraInfo:
-                'Ideal study companion or gift for Portsmouth students.',
+            extraInfo: 'Ideal study companion or gift for Portsmouth students.',
             colours: const [],
             sizes: const [],
             features: const [
@@ -1019,7 +1021,7 @@ class ProductCard extends StatelessWidget {
             ],
           );
 
-        // Fallback for anything else
+          // Fallback for anything else
         } else {
           openProductPage(
             context,
