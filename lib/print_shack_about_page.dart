@@ -50,15 +50,7 @@ class PrintShackAboutPage extends StatelessWidget {
                             direction:
                                 isNarrow ? Axis.vertical : Axis.horizontal,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              _PrintImage('assets/images/print_shack_left.jpg'),
-                              SizedBox(width: 12, height: 12),
-                              _PrintImage(
-                                  'assets/images/print_shack_center.jpg'),
-                              SizedBox(width: 12, height: 12),
-                              _PrintImage(
-                                  'assets/images/print_shack_right.jpg'),
-                            ],
+                            
                           );
                         },
                       ),
@@ -126,6 +118,7 @@ class PrintShackAboutPage extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _PrintImage extends StatelessWidget {
   final String assetPath;
   const _PrintImage(this.assetPath);
