@@ -977,7 +977,7 @@ class ProductCard extends StatelessWidget {
               'Strong magnet backing',
               'Full colour print',
             ],
-            careInstructions: 'Wipe clean with a damp cloth.',
+            careInstructions: 'Wipe clean with a damp cloth.';
 
         // Portsmouth City Bookmark – example SOLD OUT
         } else if (title == 'Portsmouth City Bookmark') {
