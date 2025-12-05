@@ -1,7 +1,9 @@
 //// dart
 // filepath: c:\Users\riris\Desktop\Union shop\union_shop\lib\merchandise_page.dart
 import 'package:flutter/material.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/main.dart'; // TopHeader, AppFooter, ProductCard
+import 'package:union_shop/product.dart';
+import 'package:union_shop/product_filters.dart';
 
 class MerchandisePage extends StatefulWidget {
   const MerchandisePage({super.key});
@@ -13,24 +15,139 @@ class MerchandisePage extends StatefulWidget {
 class _MerchandisePageState extends State<MerchandisePage> {
   void _placeholderCallbackForButtons() {}
 
-  String _selectedFilter = 'All products';
-  String _selectedSort = 'Best selling';
-
-  final List<String> _filterOptions = [
-    'All products',
-    'Accessories',
-    'Stationery',
+  // Full merchandise list (mapped from your existing grid)
+  final List<Product> _allProducts = const [
+    Product(
+      title: 'ID Holders',
+      price: '£0.75',
+      imageUrl: 'assets/images/idholder.png',
+      category: 'Accessories',
+      colour: 'Purple',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Lanyards',
+      price: '£2.75',
+      imageUrl: 'assets/images/lanyard.png',
+      category: 'Accessories',
+      colour: 'Purple',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Graduation bears',
+      price: '£0.00', // sold out, real price irrelevant
+      imageUrl: 'assets/images/graduationbear.png',
+      category: 'Gifts',
+      colour: 'Brown',
+      size: 'One size',
+      soldOut: true,
+    ),
+    Product(
+      title: 'UoP Cotton Shopper',
+      price: '£1.99',
+      imageUrl: 'assets/images/cottonshopper.png',
+      category: 'Bags',
+      colour: 'Natural',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Rainbow Lanyard',
+      price: '£2.75',
+      imageUrl: 'assets/images/rainbowlanyard.png',
+      category: 'Accessories',
+      colour: 'Rainbow',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Pen',
+      price: '£1.00',
+      imageUrl: 'assets/images/pen.png',
+      category: 'Stationery',
+      colour: 'Purple',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Lapel Pin',
+      price: '£4.00',
+      imageUrl: 'assets/images/lapelpin.png',
+      category: 'Accessories',
+      colour: 'Silver',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Crested Tie',
+      originalPrice: '£15.00',
+      price: '£10.99',
+      imageUrl: 'assets/images/graduationtie.png',
+      category: 'Accessories',
+      colour: 'Navy',
+      size: 'One size',
+    ),
+    Product(
+      title: 'Crested Badge',
+      originalPrice: '£7.00',
+      price: '£4.99',
+      imageUrl: 'assets/images/graduationbadge.png',
+      category: 'Accessories',
+      colour: 'Gold',
+      size: 'One size',
+    ),
   ];
 
-  final List<String> _sortOptions = [
+  String? _selectedCategory;
+  String? _selectedColour;
+
+  // sort mode text
+  String _selectedSort = 'Best selling';
+  final List<String> _sortOptions = const [
     'Best selling',
     'Price: Low to High',
     'Price: High to Low',
     'Alphabetically, A–Z',
   ];
 
+  // helpers to parse price strings like "£4.99"
+  double _priceValue(Product p) {
+    final stripped = p.price.replaceAll('£', '').trim();
+    return double.tryParse(stripped) ?? 0.0;
+  }
+
+  List<Product> get _filteredAndSortedProducts {
+    final filtered = _allProducts.where((p) {
+      final matchesCategory =
+          _selectedCategory == null || p.category == _selectedCategory;
+      final matchesColour =
+          _selectedColour == null || p.colour == _selectedColour;
+      return matchesCategory && matchesColour;
+    }).toList();
+
+    switch (_selectedSort) {
+      case 'Price: Low to High':
+        filtered.sort((a, b) => _priceValue(a).compareTo(_priceValue(b)));
+        break;
+      case 'Price: High to Low':
+        filtered.sort((a, b) => _priceValue(b).compareTo(_priceValue(a)));
+        break;
+      case 'Alphabetically, A–Z':
+        filtered.sort((a, b) => a.title.compareTo(b.title));
+        break;
+      case 'Best selling':
+      default:
+        // keep original order
+        break;
+    }
+
+    return filtered;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final categories = _allProducts.map((p) => p.category).toSet().toList()
+      ..sort();
+    final colours = _allProducts.map((p) => p.colour).toSet().toList()..sort();
+
+    final products = _filteredAndSortedProducts;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -42,7 +159,7 @@ class _MerchandisePageState extends State<MerchandisePage> {
 
             const SizedBox(height: 40),
 
-            // Title: "Merchandise"
+            // Title
             Container(
               width: double.infinity,
               color: Colors.white,
@@ -69,31 +186,25 @@ class _MerchandisePageState extends State<MerchandisePage> {
                   const EdgeInsets.symmetric(horizontal: 180.0, vertical: 8),
               child: Row(
                 children: [
-                  const Text(
-                    'FILTER BY  ',
-                    style: TextStyle(fontSize: 10, color: Colors.black54),
+                  // left: type/colour filters
+                  Expanded(
+                    child: ProductFilters(
+                      categories: categories,
+                      colours: colours,
+                      selectedCategory: _selectedCategory,
+                      selectedColour: _selectedColour,
+                      onCategoryChanged: (value) {
+                        setState(() => _selectedCategory = value);
+                      },
+                      onColourChanged: (value) {
+                        setState(() => _selectedColour = value);
+                      },
+                    ),
                   ),
-                  DropdownButton<String>(
-                    value: _selectedFilter,
-                    items: _filterOptions
-                        .map(
-                          (value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: const TextStyle(fontSize: 10),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    isDense: true,
-                    underline: const SizedBox.shrink(),
-                    onChanged: (value) {
-                      if (value == null) return;
-                      setState(() => _selectedFilter = value);
-                    },
-                  ),
-                  const Spacer(),
+
+                  const SizedBox(width: 16),
+
+                  // sort + count
                   const Text(
                     'SORT BY  ',
                     style: TextStyle(fontSize: 10, color: Colors.black54),
@@ -118,10 +229,13 @@ class _MerchandisePageState extends State<MerchandisePage> {
                       setState(() => _selectedSort = value);
                     },
                   ),
-                  const Spacer(),
-                  const Text(
-                    '35 products',
-                    style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
+                  const SizedBox(width: 16),
+                  Text(
+                    '${products.length} products',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ],
               ),
@@ -129,7 +243,7 @@ class _MerchandisePageState extends State<MerchandisePage> {
 
             const SizedBox(height: 24),
 
-            // Initial 3‑product row matching your screenshot
+            // Product grid using ProductCard
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 180, vertical: 0),
@@ -140,60 +254,16 @@ class _MerchandisePageState extends State<MerchandisePage> {
                 crossAxisSpacing: 32,
                 mainAxisSpacing: 40,
                 childAspectRatio: 3 / 4,
-                children: const [
-                  // Row 1
-                  ProductCard(
-                    title: 'ID Holders',
-                    price: '£0.75',
-                    imageUrl: 'assets/images/idholder.png',
-                  ),
-                  ProductCard(
-                    title: 'Lanyards',
-                    price: '£2.75',
-                    imageUrl: 'assets/images/lanyard.png',
-                  ),
-                  ProductCard(
-                    title: 'Graduation bears',
-                    price: 'Sold out',
-                    imageUrl: 'assets/images/graduationbear.png',
-                  ),
-
-                  // Row 2
-                  ProductCard(
-                    title: 'UoP Cotton Shopper',
-                    price: '£1.99',
-                    imageUrl: 'assets/images/cottonshopper.png',
-                  ),
-                  ProductCard(
-                    title: 'Rainbow Lanyard',
-                    price: '£2.75',
-                    imageUrl: 'assets/images/rainbowlanyard.png',
-                  ),
-                  ProductCard(
-                    title: 'Pen',
-                    price: '£1.00',
-                    imageUrl: 'assets/images/pen.png',
-                  ),
-
-                  // Row 3
-                  ProductCard(
-                    title: 'Lapel Pin',
-                    price: '£4.00',
-                    imageUrl: 'assets/images/lapelpin.png',
-                  ),
-                  ProductCard(
-                    title: 'Crested Tie',
-                    originalPrice: '£15.00',
-                    price: '£10.99',
-                    imageUrl: 'assets/images/graduationtie.png',
-                  ),
-                  ProductCard(
-                    title: 'Crested Badge',
-                    originalPrice: '£7.00',
-                    price: '£4.99',
-                    imageUrl: 'assets/images/graduationbadge.png',
-                  ),
-                ],
+                children: products.map((p) {
+                  return ProductCard(
+                    title: p.title,
+                    // show "Sold out" text instead of price when soldOut
+                    price: p.soldOut ? 'Sold out' : p.price,
+                    originalPrice: p.originalPrice,
+                    imageUrl: p.imageUrl,
+                    highlightPrice: p.originalPrice == null,
+                  );
+                }).toList(),
               ),
             ),
 
