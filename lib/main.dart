@@ -977,7 +977,8 @@ class ProductCard extends StatelessWidget {
               'Strong magnet backing',
               'Full colour print',
             ],
-            careInstructions: 'Wipe clean with a damp cloth.';
+            careInstructions: 'Wipe clean with a damp cloth.',
+          );
 
         // Portsmouth City Bookmark – example SOLD OUT
         } else if (title == 'Portsmouth City Bookmark') {
@@ -996,7 +997,7 @@ class ProductCard extends StatelessWidget {
               'Durable laminated finish',
               'Double‑sided full‑colour print',
             ],
-            careInstructions: 'Wipe clean with a dry cloth.',
+            careInstructions: 'Wipe clean with a dry cloth.');
 
         // Portsmouth City Notebook
         } else if (title == 'Portsmouth City Notebook') {
