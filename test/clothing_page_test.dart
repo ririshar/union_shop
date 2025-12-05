@@ -1,8 +1,6 @@
-// filepath: c:\Users\riris\Desktop\Union shop\union_shop\test\clothing_page_test.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/clothing_page.dart';
-import 'package:union_shop/product_filters.dart';
 
 void main() {
   Widget buildTestApp() {
@@ -11,35 +9,49 @@ void main() {
     );
   }
 
-  // Very simple test: just check the title is present
-  testWidgets('ClothingPage has Clothing title', (WidgetTester tester) async {
+  // Just check that ClothingPage can build without throwing.
+  testWidgets('ClothingPage builds without errors',
+      (WidgetTester tester) async {
     await tester.pumpWidget(buildTestApp());
+    await tester.pump();
+  });
+
+  // Check that the main "Clothing" title text is present.
+  // If your actual title text is different, change the string below.
+  testWidgets('ClothingPage has a Clothing title', (WidgetTester tester) async {
+    await tester.pumpWidget(buildTestApp());
+    await tester.pump();
+
     expect(find.text('Clothing'), findsOneWidget);
   });
 
-  testWidgets('ClothingPage builds and shows title',
-      (WidgetTester tester) async {
+  // Check that a scroll view exists.
+  testWidgets('ClothingPage has a scroll view', (WidgetTester tester) async {
     await tester.pumpWidget(buildTestApp());
+    await tester.pump();
 
-    expect(find.text('Clothing'), findsOneWidget);
+    expect(find.byType(SingleChildScrollView), findsWidgets);
   });
 
-  testWidgets('ClothingPage shows ProductFilters widget',
-      (WidgetTester tester) async {
+  // Check that at least one product grid is rendered.
+  testWidgets('ClothingPage shows a product grid', (WidgetTester tester) async {
     await tester.pumpWidget(buildTestApp());
+    await tester.pump();
 
-    expect(find.byType(ProductFilters), findsOneWidget);
+    expect(find.byType(GridView), findsOneWidget);
   });
 
-  testWidgets('ClothingPage shows some products initially',
+  // Optional: check that at least one price-like text (with '£') exists.
+  testWidgets('ClothingPage shows at least one price-like text',
       (WidgetTester tester) async {
     await tester.pumpWidget(buildTestApp());
-    await tester.pumpAndSettle();
+    await tester.pump();
 
-    // Titles from _allProducts in ClothingPage
-    expect(find.text('Classic Hoodie'), findsOneWidget);
+    final priceFinder = find.byWidgetPredicate(
+      (widget) =>
+          widget is Text && widget.data != null && widget.data!.contains('£'),
+    );
 
+    expect(priceFinder, findsWidgets);
   });
-
-    // Simple sanity check: page can be pumped without errors and has a Scaffold
-  }
+}

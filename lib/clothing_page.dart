@@ -11,7 +11,7 @@ class ClothingPage extends StatefulWidget {
 }
 
 class _ClothingPageState extends State<ClothingPage> {
-  // ORIGINAL clothing products + hats / beanie 
+  // ORIGINAL clothing products + hats / beanie
   final List<Product> _allProducts = const [
     Product(
       title: 'Classic Hoodie',
@@ -51,7 +51,8 @@ class _ClothingPageState extends State<ClothingPage> {
     Product(
       title: 'Cap',
       price: '£10.00',
-      imageUrl: 'assets/images/classiccap.png', // update if your filename is different
+      imageUrl:
+          'assets/images/classiccap.png', // update if your filename is different
       category: 'Headwear',
       colour: 'Purple',
       size: 'One size',
@@ -64,8 +65,6 @@ class _ClothingPageState extends State<ClothingPage> {
       colour: 'Purple',
       size: 'One size',
     ),
-  
-    
   ];
 
   String? _selectedCategory;
@@ -90,80 +89,93 @@ class _ClothingPageState extends State<ClothingPage> {
     final colours = _allProducts.map((p) => p.colour).toSet().toList()..sort();
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Clothing'),
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: TopHeader(
-                activeLabel: 'Shop',
-                placeholderCallbackForButtons: _placeholderCallbackForButtons,
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Clothing',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: TopHeader(
+                    activeLabel: 'Shop',
+                    placeholderCallbackForButtons:
+                        _placeholderCallbackForButtons,
                   ),
-                  const SizedBox(height: 16),
+                ),
+                Container(
+                  color: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Clothing',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
 
-                  // Filters bar
-                  ProductFilters(
-                    categories: categories,
-                    colours: colours,
-                    selectedCategory: _selectedCategory,
-                    selectedColour: _selectedColour,
-                    onCategoryChanged: (value) {
-                      setState(() => _selectedCategory = value);
-                    },
-                    onColourChanged: (value) {
-                      setState(() => _selectedColour = value);
-                    },
-                  ),
+                      // Filters bar
+                      ProductFilters(
+                        categories: categories,
+                        colours: colours,
+                        selectedCategory: _selectedCategory,
+                        selectedColour: _selectedColour,
+                        onCategoryChanged: (value) {
+                          setState(() => _selectedCategory = value);
+                        },
+                        onColourChanged: (value) {
+                          setState(() => _selectedColour = value);
+                        },
+                      ),
 
-                  const SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
-                  // Product grid using ProductCard
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final crossAxisCount = constraints.maxWidth > 800 ? 3 : 2;
-                      final childAspectRatio = constraints.maxWidth / (crossAxisCount * 300);
+                      // Product grid using ProductCard
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          final crossAxisCount =
+                              constraints.maxWidth > 800 ? 3 : 2;
+                          final childAspectRatio =
+                              constraints.maxWidth / (crossAxisCount * 300);
 
-                      return GridView.count(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 24,
-                        childAspectRatio: childAspectRatio,
-                        children: _filteredProducts.map((p) {
-                          return ProductCard(
-                            title: p.title,
-                            price: p.price,
-                            originalPrice: p.originalPrice,
-                            imageUrl: p.imageUrl,
-                            highlightPrice: p.originalPrice == null,
+                          return GridView.count(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 24,
+                            childAspectRatio: childAspectRatio,
+                            children: _filteredProducts.map((p) {
+                              return ProductCard(
+                                title: p.title,
+                                price: p.price,
+                                originalPrice: p.originalPrice,
+                                imageUrl: p.imageUrl,
+                                highlightPrice: p.originalPrice == null,
+                              );
+                            }).toList(),
                           );
-                        }).toList(),
-                      );
-                    },
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: AppFooter(),
+                ),
+              ],
             ),
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: AppFooter(),
-            ),
-          ],
+          ),
         ),
       ),
     );
